@@ -29,29 +29,90 @@ window.PMRR = (function () {
   // ===== As 4 regiões prioritárias =====
   const regioes = [
     {
+      id: "ilhas",
       nome: "Região das Ilhas", local: "Ilha Grande dos Marinheiros",
       setores: 27, pessoas: 2150, edificacoes: 854,
       r3: 11, r4: 16, processo: "100% hidrológicos (inundações)",
-      lat: -30.000, lng: -51.270, cor: "#1b7a5a"
+      lat: -30.000, lng: -51.270, cor: "#1b7a5a",
+      contexto: {
+        caracterizacao: "Conjunto de 16 ilhas no Delta do Jacuí (criado em 1944). A Ilha Grande dos Marinheiros está dentro de duas áreas de proteção ambiental estaduais.",
+        fisica: "Planície flúvio-lagunar com solos saturados e de baixa capacidade de suporte. É o local mais exposto da cidade a inundações — sempre o primeiro a ser atingido — e não está protegido pelo sistema de diques.",
+        urbano: "Depende da precipitação em toda a Região Hidrográfica do Guaíba (84,6 mil km²) e pode ser potencializado por ventos do quadrante sul."
+      }
     },
     {
+      id: "norte",
       nome: "Região Norte", local: "Bairro Santa Rosa de Lima",
       setores: 7, pessoas: 2202, edificacoes: 933,
       r3: 6, r4: 1, processo: "100% hidrológicos (inundações, enxurradas e alagamentos)",
-      lat: -29.992, lng: -51.135, cor: "#2a9d72"
+      lat: -29.992, lng: -51.135, cor: "#2a9d72",
+      contexto: {
+        caracterizacao: "Área rural até meados do século XX, com ocupação acelerada a partir dos anos 1970 e expansão recente (pós-2002) sobre áreas de várzea inundável.",
+        fisica: "Planície de inundação (várzea) do Arroio Feijó, afluente do Rio Gravataí. Topografia plana e mal drenada, desprotegida pelo sistema de diques metropolitanos.",
+        urbano: "Ocupação em consolidação sobre área de risco, com infraestrutura de drenagem ineficiente para o tipo de ameaça. Fortemente atingida na inundação de maio de 2024."
+      }
     },
     {
+      id: "leste",
       nome: "Região Leste", local: "Bairros Bom Jesus e Jardim Carvalho",
       setores: 56, pessoas: 1574, edificacoes: 628,
       r3: 50, r4: 6, processo: "17 hidrológicos · 30 geodinâmicos · 9 combinados",
-      lat: -30.050, lng: -51.160, cor: "#155c47"
+      lat: -30.050, lng: -51.160, cor: "#155c47",
+      contexto: {
+        caracterizacao: "Ocupações irregulares iniciadas na década de 1950 (Bom Jesus) e em meados do século XX (Jardim Carvalho), em processo de urbanização espontâneo e desordenado.",
+        fisica: "Topografia acidentada sobre morros graníticos, com declividades íngremes, na Bacia do Arroio Dilúvio. Solos saprolíticos suscetíveis à erosão.",
+        urbano: "Urbanização densa, construções precárias e acessos críticos (becos estreitos, pontilhões improvisados e escadarias sem proteção). Drenagem comprometida por ocupações e acúmulo de resíduos nos cursos d'água."
+      }
     },
     {
+      id: "partenon",
       nome: "Região Partenon", local: "Partenon, Cel. Aparício Borges, Vila São José e Vila João Pessoa",
       setores: 114, pessoas: 2665, edificacoes: 1023,
       r3: 102, r4: 12, processo: "70 hidrológicos · 41 geodinâmicos · 3 combinados",
-      lat: -30.066, lng: -51.172, cor: "#103b30"
+      lat: -30.066, lng: -51.172, cor: "#103b30",
+      contexto: {
+        caracterizacao: "Origem histórica no século XIX, com intensa expansão urbana recente (2002–2025) sobre encostas e margens de arroios — vetor de crescimento desordenado.",
+        fisica: "Relevo acidentado de morros, na área central da Bacia do Arroio Dilúvio, com destaque para o Arroio Moinho e seus afluentes, de declividade acentuada e resposta hidrológica rápida.",
+        urbano: "Ocupação sobre vertentes, padrão construtivo baixo e acessos extremamente críticos. Sistema de drenagem ineficiente e cursos d'água contaminados por esgoto."
+      }
     }
+  ];
+
+  // ===== Processos perigosos (Cartilha PMRR-POA) =====
+  const processosPerigosos = [
+    { icone: "🌊", nome: "Inundações", desc: "Transbordamento dos rios, geralmente com baixas velocidades, em que a água invade as planícies ocupadas. As inundações do Guaíba dependem das chuvas em uma grande área do Estado e, em geral, podem ser previstas com dias de antecedência." },
+    { icone: "💧", nome: "Enxurradas", desc: "Processos de alta velocidade em arroios e córregos dos bairros íngremes, com elevado poder destrutivo e alto risco à vida. Lixo e intervenções mal feitas agravam o perigo. São causadas por chuvas intensas e localizadas, de difícil previsão." },
+    { icone: "🏚️", nome: "Alagamentos", desc: "Ocorrem quando a água da chuva se acumula em ruas e áreas urbanas por falhas no sistema de drenagem (bueiros, pontilhões, canalizações etc.)." },
+    { icone: "⛰️", nome: "Escorregamentos e queda de blocos", desc: "Escorregamentos de cortes e aterros, quedas de muros e de blocos em áreas íngremes, associados a chuvas intensas, cortes muito inclinados e má drenagem. Podem trazer risco à vida." },
+    { icone: "🪨", nome: "Erosão", desc: "Remoção do solo pela água, especialmente em áreas sem proteção. Causa descalçamento de muros junto a arroios e de fundações de casas, além da instabilização de blocos de rocha." }
+  ];
+
+  // ===== Soluções: medidas estruturais (tipos) =====
+  const solucoesEstruturais = [
+    { icone: "🪜", nome: "Escada de chuva", desc: "Estrutura que conduz a água da chuva de forma controlada, reduzindo a velocidade e possíveis erosões." },
+    { icone: "🛢️", nome: "Bacias de amortecimento", desc: "Armazenam temporariamente a água da chuva e reduzem alagamentos a jusante." },
+    { icone: "🗑️", nome: "Armadilhas de lixo", desc: "Estruturas que retêm resíduos sólidos, evitando entupimentos e alagamentos." },
+    { icone: "🧱", nome: "Muros de contenção", desc: "Construídos com gabião, pedra ou concreto para conter o solo e evitar escorregamentos." },
+    { icone: "🏠", nome: "Moradias elevadas", desc: "Casas construídas acima do nível de inundação para reduzir danos." }
+  ];
+
+  // ===== Soluções: medidas não estruturais (Cartilha) =====
+  const solucoesNaoEstruturais = [
+    "Núcleos Comunitários de Proteção e Defesa Civil (NUPDEC)",
+    "Plano de ação comunitário articulado ao Plano de Contingência Municipal",
+    "Sistemas de alerta e alarme",
+    "Atividades educativas sobre o território e os riscos (inclusive na rede de ensino)",
+    "Monitoramento e fiscalização das obras e da ocupação urbana",
+    "Cartas Geotécnicas de Aptidão à Urbanização",
+    "Assessoria técnica (ATHIS) para melhorias das moradias"
+  ];
+
+  // ===== Como a comunidade pode participar (Cartilha) =====
+  const participacao = [
+    { icone: "📢", titulo: "Comunicar situações de risco", desc: "Informar a Defesa Civil sobre entulho em arroios, queda de margens e barrancos, rachaduras em muros e moradias e ocupações inadequadas." },
+    { icone: "🔔", titulo: "Ficar atento aos alertas", desc: "Acompanhar os avisos da Defesa Civil, respeitar orientações em emergências e não compartilhar informações falsas." },
+    { icone: "🤝", titulo: "Participar de organizações", desc: "Integrar NUPDECs, reuniões e oficinas, contribuindo com o conhecimento local e criando redes de apoio." },
+    { icone: "🧹", titulo: "Cuidar das moradias e do entorno", desc: "Não jogar lixo em arroios, valas e bocas de lobo; manter a drenagem desobstruída; evitar aterros mal construídos." }
   ];
 
   // ===== Critérios de escolha das áreas prioritárias =====
@@ -157,6 +218,7 @@ window.PMRR = (function () {
 
   return {
     sintese, tipologia, regioes, criterios, processo,
+    processosPerigosos, solucoesEstruturais, solucoesNaoEstruturais, participacao,
     medidas, medidasResumo,
     etapas, produtos, materiais, contatos, creditos
   };

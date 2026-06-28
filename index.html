@@ -25,9 +25,10 @@
       <nav class="nav__links" id="navLinks">
         <a href="#sobre">O Plano</a>
         <a href="#risco">O risco</a>
-        <a href="#areas">Áreas prioritárias</a>
+        <a href="#areas">Áreas</a>
         <a href="#mapa">Mapa</a>
         <a href="#acoes">Medidas</a>
+        <a href="#solucoes">Soluções</a>
         <a href="#protecao">Proteção</a>
       </nav>
       <button class="nav__toggle" id="navToggle" aria-label="Abrir menu">☰</button>
@@ -134,8 +135,23 @@
     </div>
   </section>
 
+  <!-- PROCESSOS PERIGOSOS -->
+  <section class="section" id="processos">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__tag">Entenda</span>
+        <h2>Os processos perigosos</h2>
+        <p class="section__intro">
+          São fenômenos que causam danos quando ocorrem em áreas com moradias e
+          infraestrutura. Conhecer cada um ajuda a se prevenir e a se proteger.
+        </p>
+      </div>
+      <div class="processos-grid" id="processos-perigosos"></div>
+    </div>
+  </section>
+
   <!-- ÁREAS PRIORITÁRIAS -->
-  <section class="section" id="areas">
+  <section class="section section--alt" id="areas">
     <div class="container">
       <div class="section__head">
         <span class="section__tag">Onde atuamos</span>
@@ -159,7 +175,7 @@
   </section>
 
   <!-- MAPA -->
-  <section class="section section--alt" id="mapa">
+  <section class="section" id="mapa">
     <div class="container">
       <div class="section__head">
         <span class="section__tag">Mapa interativo</span>
@@ -181,7 +197,7 @@
   </section>
 
   <!-- MEDIDAS / INVESTIMENTO -->
-  <section class="section" id="acoes">
+  <section class="section section--alt" id="acoes">
     <div class="container">
       <div class="section__head">
         <span class="section__tag">Medidas propostas</span>
@@ -221,6 +237,66 @@
         <div class="fact">
           <span class="fact__num" id="custoMedio">R$ 0</span>
           <span class="fact__txt">custo médio por família atendida</span>
+        </div>
+      </div>
+
+      <div class="card tabela-card">
+        <div class="card__head-row">
+          <h3>Todas as 24 medidas</h3>
+          <div class="filtros" id="medidasFiltros">
+            <select id="filtroRegiao" class="filtro"></select>
+            <select id="filtroTipo" class="filtro">
+              <option value="">Todos os tipos</option>
+              <option value="H">Hidrológicas</option>
+              <option value="G">Geotécnicas</option>
+            </select>
+            <select id="filtroGrau" class="filtro">
+              <option value="">Todos os graus</option>
+              <option value="R4">Muito Alto (R4)</option>
+              <option value="R3">Alto (R3)</option>
+            </select>
+          </div>
+        </div>
+        <div class="tabela-wrap">
+          <table class="tabela" id="tabelaMedidas">
+            <thead>
+              <tr>
+                <th>Intervenção</th><th>Local</th><th>Grau</th>
+                <th class="num">Domicílios</th><th class="num">Investimento</th>
+              </tr>
+            </thead>
+            <tbody id="tabelaMedidasBody"></tbody>
+          </table>
+        </div>
+        <p class="card__note" id="tabelaResumo"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUÇÕES -->
+  <section class="section" id="solucoes">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__tag">Soluções</span>
+        <h2>Como reduzir os riscos</h2>
+        <p class="section__intro">
+          A redução dos riscos combina <strong>medidas estruturais</strong> (obras) e
+          <strong>medidas não estruturais</strong> (gestão, alerta e organização
+          comunitária), com a participação das comunidades em todas as etapas.
+        </p>
+      </div>
+
+      <h3 class="block-title">Medidas estruturais (obras)</h3>
+      <div class="soluo-grid" id="solucoes-estruturais"></div>
+
+      <div class="grid-2 solucoes-2">
+        <div class="card">
+          <h3>Medidas não estruturais</h3>
+          <ul class="lista-check" id="solucoes-nao-estruturais"></ul>
+        </div>
+        <div class="card">
+          <h3>Como a comunidade pode participar</h3>
+          <div class="particip" id="participacao-grid"></div>
         </div>
       </div>
     </div>

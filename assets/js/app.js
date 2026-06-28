@@ -29,9 +29,9 @@
       <p>${c.desc}</p>
     </article>`).join("");
 
-  // Regiões prioritárias
+  // Regiões prioritárias (clicáveis -> abrem o detalhe no mapa)
   document.getElementById("regioes-grid").innerHTML = D.regioes.map(r => `
-    <article class="regiao reveal">
+    <article class="regiao reveal" data-regiao="${r.id}">
       <span class="regiao__badge">${r.setores} setores</span>
       <h4>${r.nome}</h4>
       <p class="regiao__local">${r.local}</p>
@@ -40,7 +40,13 @@
         <div><b>${NUM.format(r.edificacoes)}</b><span>edificações</span></div>
       </div>
       <p class="regiao__tipo">${r.processo}</p>
+      <span class="regiao__link">Ver detalhes no mapa →</span>
     </article>`).join("");
+  document.getElementById("regioes-grid").addEventListener("click", (e) => {
+    const card = e.target.closest(".regiao"); if (!card) return;
+    document.getElementById("mapa").scrollIntoView({ behavior: "smooth" });
+    setTimeout(() => focusRegiao(card.dataset.regiao), 600);
+  });
 
   // Processo participativo
   const P = D.processo;
@@ -72,6 +78,75 @@
       <span class="material__icon">📄</span>
       <span>${m.titulo}<small>Abrir no Google Drive</small></span>
     </a>`).join("");
+
+  // Mapeia bairro -> região
+  function regiaoDoBairro(b) {
+    if (/Bom Jesus|Jardim Carvalho/.test(b)) return "Região Leste";
+    if (/Partenon|Aparício Borges|São José|João Pessoa/.test(b)) return "Região Partenon";
+    if (/Santa Rosa/.test(b)) return "Região Norte";
+    if (/Marinheiros|Ilha/.test(b)) return "Região das Ilhas";
+    return "";
+  }
+
+  // Processos perigosos
+  document.getElementById("processos-perigosos").innerHTML = D.processosPerigosos.map(p => `
+    <article class="perigo reveal">
+      <span class="perigo__icone">${p.icone}</span>
+      <h4>${p.nome}</h4>
+      <p>${p.desc}</p>
+    </article>`).join("");
+
+  // Soluções estruturais
+  document.getElementById("solucoes-estruturais").innerHTML = D.solucoesEstruturais.map(s => `
+    <article class="solu reveal">
+      <span class="solu__icone">${s.icone}</span>
+      <h4>${s.nome}</h4>
+      <p>${s.desc}</p>
+    </article>`).join("");
+
+  // Não estruturais
+  document.getElementById("solucoes-nao-estruturais").innerHTML =
+    D.solucoesNaoEstruturais.map(s => `<li>${s}</li>`).join("");
+
+  // Participação da comunidade
+  document.getElementById("participacao-grid").innerHTML = D.participacao.map(p => `
+    <div class="particip__item">
+      <span class="particip__icone">${p.icone}</span>
+      <div><b>${p.titulo}</b><p>${p.desc}</p></div>
+    </div>`).join("");
+
+  // Tabela filtrável das 24 medidas
+  const filtroRegiao = document.getElementById("filtroRegiao");
+  const filtroTipo = document.getElementById("filtroTipo");
+  const filtroGrau = document.getElementById("filtroGrau");
+  const tbody = document.getElementById("tabelaMedidasBody");
+  const tabelaResumo = document.getElementById("tabelaResumo");
+
+  const regioesComMedidas = [...new Set(D.medidas.map(m => regiaoDoBairro(m.bairro)))];
+  filtroRegiao.innerHTML = `<option value="">Todas as regiões</option>` +
+    regioesComMedidas.map(r => `<option value="${r}">${r}</option>`).join("");
+
+  function renderTabela() {
+    const fr = filtroRegiao.value, ft = filtroTipo.value, fg = filtroGrau.value;
+    const rows = D.medidas.filter(m =>
+      (!fr || regiaoDoBairro(m.bairro) === fr) &&
+      (!ft || m.tipo === ft) &&
+      (!fg || m.grau === fg)
+    ).sort((a, b) => b.custo - a.custo);
+    tbody.innerHTML = rows.map(m => `
+      <tr>
+        <td><span class="dot dot--${m.tipo === 'G' ? 'g' : 'h'}"></span>${m.intervencao}</td>
+        <td>${m.local}</td>
+        <td><span class="grau grau--${m.grau.toLowerCase()}">${m.grau}</span></td>
+        <td class="num">${NUM.format(m.domicilios)}</td>
+        <td class="num">${BRL.format(m.custo)}</td>
+      </tr>`).join("");
+    const totDom = rows.reduce((a, m) => a + m.domicilios, 0);
+    const totCusto = rows.reduce((a, m) => a + m.custo, 0);
+    tabelaResumo.textContent = `${rows.length} ${rows.length === 1 ? "medida" : "medidas"} · ${NUM.format(totDom)} domicílios · ${BRL.format(totCusto)}`;
+  }
+  [filtroRegiao, filtroTipo, filtroGrau].forEach(s => s.addEventListener("change", renderTabela));
+  renderTabela();
 
   // Footer
   document.getElementById("footerCreditos").textContent =
@@ -215,6 +290,10 @@
 
   const side = document.getElementById("mapSide");
   function showSide(r) {
+    const med = D.medidas.filter(m => regiaoDoBairro(m.bairro) === r.nome).sort((a, b) => b.custo - a.custo);
+    const medHtml = med.length ? `
+      <p class="map-side__sub">Medidas estruturais nesta região (${med.length})</p>
+      <ul class="map-side__med">${med.map(m => `<li><span>${m.intervencao}</span><b>${BRL.format(m.custo)}</b></li>`).join("")}</ul>` : "";
     side.innerHTML = `
       <span class="map-side__id">${r.setores} setores</span>
       <h3>${r.nome}</h3>
@@ -225,11 +304,17 @@
         <div class="map-side__row"><span>Risco alto (R3)</span><b>${r.r3} setores</b></div>
         <div class="map-side__row"><span>Risco muito alto (R4)</span><b>${r.r4} setores</b></div>
       </div>
-      <p class="map-side__proc">${r.processo}</p>`;
+      <p class="map-side__proc">${r.processo}</p>
+      <p class="map-side__sub">Contexto</p>
+      <p class="map-side__ctx">${r.contexto.caracterizacao}</p>
+      <p class="map-side__ctx">${r.contexto.fisica}</p>
+      <p class="map-side__ctx">${r.contexto.urbano}</p>
+      ${medHtml}`;
   }
 
   const maxP = Math.max(...D.regioes.map(r => r.pessoas));
   const markers = [];
+  const markerById = {};
   D.regioes.forEach(r => {
     const radius = 14 + 26 * Math.sqrt(r.pessoas / maxP);
     const m = L.circleMarker([r.lat, r.lng], {
@@ -240,6 +325,15 @@
     m.on("mouseover", () => m.setStyle({ fillOpacity: 1 }));
     m.on("mouseout", () => m.setStyle({ fillOpacity: .8 }));
     markers.push([r.lat, r.lng]);
+    markerById[r.id] = { marker: m, regiao: r };
   });
   map.fitBounds(markers, { padding: [40, 40] });
+
+  // Foco em uma região (chamado pelos cards)
+  window.focusRegiao = function (id) {
+    const entry = markerById[id]; if (!entry) return;
+    map.setView([entry.regiao.lat, entry.regiao.lng], 13, { animate: true });
+    entry.marker.openPopup();
+    showSide(entry.regiao);
+  };
 })();
