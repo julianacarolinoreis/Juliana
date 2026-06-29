@@ -297,6 +297,22 @@ a { color: inherit; text-decoration: none; }
 .equipe__bloco li { font-size: .9rem; color: var(--ink); position: relative; padding-left: 16px; }
 .equipe__bloco li::before { content: "•"; position: absolute; left: 0; color: var(--green-500); }
 
+/* ===== Galeria de campo ===== */
+.galeria { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.galeria .foto:first-child { grid-column: span 2; grid-row: span 2; }
+.foto { position: relative; margin: 0; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); cursor: pointer; background: #ddd; }
+.foto img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; min-height: 150px; }
+.foto:hover img { transform: scale(1.05); }
+.foto figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 14px 12px; color: #fff; font-size: .85rem; font-weight: 600; background: linear-gradient(transparent, rgba(8,30,24,.85)); }
+.foto figcaption span { display: block; font-weight: 500; font-size: .76rem; opacity: .85; margin-top: 2px; }
+
+.lightbox { position: fixed; inset: 0; z-index: 2000; background: rgba(8,20,16,.92); display: none; align-items: center; justify-content: center; padding: 30px; }
+.lightbox.is-open { display: flex; }
+.lightbox__fig { margin: 0; max-width: 92vw; max-height: 92vh; text-align: center; }
+.lightbox__fig img { max-width: 92vw; max-height: 82vh; border-radius: 8px; }
+.lightbox__fig figcaption { color: #fff; margin-top: 12px; font-size: .95rem; }
+.lightbox__close { position: absolute; top: 18px; right: 24px; background: none; border: none; color: #fff; font-size: 2.4rem; line-height: 1; cursor: pointer; }
+
 /* ===== Animations ===== */
 @keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
 @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
@@ -310,6 +326,8 @@ a { color: inherit; text-decoration: none; }
   .processos-grid, .soluo-grid { grid-template-columns: repeat(2, 1fr); }
   .materiais, .solucoes-2 { grid-template-columns: 1fr; }
   .equipe__bloco ul.equipe__cols { grid-template-columns: repeat(2, 1fr); }
+  .galeria { grid-template-columns: repeat(2, 1fr); }
+  .galeria .foto:first-child { grid-column: span 2; grid-row: auto; }
 }
 @media (max-width: 600px) {
   .equipe__bloco ul.equipe__cols { grid-template-columns: 1fr; }

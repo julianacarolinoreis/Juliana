@@ -148,6 +148,32 @@
   [filtroRegiao, filtroTipo, filtroGrau].forEach(s => s.addEventListener("change", renderTabela));
   renderTabela();
 
+  // Galeria de campo + lightbox
+  const galGrid = document.getElementById("galeria-grid");
+  if (galGrid) {
+    galGrid.innerHTML = D.galeria.map((g, i) => `
+      <figure class="foto reveal" data-i="${i}">
+        <img src="${g.img}" alt="${g.legenda}" loading="lazy" />
+        <figcaption>${g.legenda}<span>${g.area}</span></figcaption>
+      </figure>`).join("");
+    const lb = document.getElementById("lightbox");
+    const lbImg = document.getElementById("lightboxImg");
+    const lbCap = document.getElementById("lightboxCap");
+    const openLb = (i) => {
+      const g = D.galeria[i];
+      lbImg.src = g.img; lbImg.alt = g.legenda;
+      lbCap.textContent = `${g.legenda} — ${g.area}`;
+      lb.classList.add("is-open"); lb.setAttribute("aria-hidden", "false");
+    };
+    const closeLb = () => { lb.classList.remove("is-open"); lb.setAttribute("aria-hidden", "true"); lbImg.src = ""; };
+    galGrid.addEventListener("click", (e) => {
+      const fig = e.target.closest(".foto"); if (fig) openLb(+fig.dataset.i);
+    });
+    document.getElementById("lightboxClose").addEventListener("click", closeLb);
+    lb.addEventListener("click", (e) => { if (e.target === lb) closeLb(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLb(); });
+  }
+
   // Porto Alegre em números
   const c = D.cidade;
   document.getElementById("cidade").innerHTML = `

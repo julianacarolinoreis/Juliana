@@ -208,6 +208,15 @@ window.PMRR = (function () {
     { nome: "Central do Cidadão (PMPA)", tel: "156" }
   ];
 
+  // ===== Galeria de registros de campo =====
+  const galeria = [
+    { img: "assets/img/campo/bomjesus-1.jpg", legenda: "Oficina de cartografia social com a comunidade", area: "Bom Jesus" },
+    { img: "assets/img/campo/bomjesus-3.jpg", legenda: "Caminhada comunitária pelo setor de risco", area: "Bom Jesus" },
+    { img: "assets/img/campo/bomjesus-4.jpg", legenda: "Arroio Mem de Sá no trecho do setor de risco", area: "Bom Jesus" },
+    { img: "assets/img/campo/bomjesus-2.jpg", legenda: "Acúmulo de resíduos obstruindo o arroio", area: "Bom Jesus" },
+    { img: "assets/img/campo/bomjesus-5.jpg", legenda: "Travessia precária sobre o arroio", area: "Bom Jesus" }
+  ];
+
   // ===== Porto Alegre em números (IBGE, 2022) =====
   const cidade = { area: 495, populacao: 1332845, densidade: 2690 };
 
@@ -235,7 +244,7 @@ window.PMRR = (function () {
   };
 
   return {
-    sintese, tipologia, regioes, criterios, processo, cidade,
+    sintese, tipologia, regioes, criterios, processo, cidade, galeria,
     processosPerigosos, solucoesEstruturais, solucoesNaoEstruturais, participacao,
     medidas, medidasResumo, equipe,
     etapas, produtos, materiais, contatos, creditos

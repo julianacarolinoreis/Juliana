@@ -198,6 +198,21 @@
     </div>
   </section>
 
+  <!-- REGISTROS DE CAMPO -->
+  <section class="section" id="campo">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__tag">Registros de campo</span>
+        <h2>O território de perto</h2>
+        <p class="section__intro">
+          Imagens das caminhadas comunitárias e inspeções técnicas, que combinaram o
+          conhecimento dos moradores com a avaliação da equipe.
+        </p>
+      </div>
+      <div class="galeria" id="galeria-grid"></div>
+    </div>
+  </section>
+
   <!-- MEDIDAS / INVESTIMENTO -->
   <section class="section section--alt" id="acoes">
     <div class="container">
@@ -388,6 +403,15 @@
       </div>
     </div>
   </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox__close" id="lightboxClose" aria-label="Fechar">×</button>
+    <figure class="lightbox__fig">
+      <img id="lightboxImg" src="" alt="" />
+      <figcaption id="lightboxCap"></figcaption>
+    </figure>
+  </div>
 
   <script src="assets/vendor/leaflet.js"></script>
   <script src="assets/vendor/chart.umd.min.js"></script>
