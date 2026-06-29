@@ -221,17 +221,18 @@ window.PMRR = (function () {
   const cidade = { area: 495, populacao: 1332845, densidade: 2690 };
 
   // ===== Equipe =====
+  // Ordem conforme a página de créditos do relatório oficial
   const equipe = {
-    coordenacao: ["Dr. Guilherme Garcia de Oliveira", "Dr. Luiz Antonio Bressani"],
+    coordenacao: ["Dr. Guilherme Garcia de Oliveira", "Dr. Luiz Antônio Bressani"],
     universidade: [
-      "Dra. Ana Carolina Badalotti Passuello", "Dra. Ana Karin Nunes",
-      "Arthur Henrique Bach", "Dra. Bárbara Maria Giaccom Ribeiro",
-      "Dr. Clódis de Oliveira Andrades Filho", "Me. Eduardo Bonow Simões",
-      "Dr. Eliseu José Weber", "Ma. Eloísa Maria Adami Giazzon",
-      "Dr. Fernando Dornelles", "Ma. Jocelei Teresa Bresolin",
-      "Juliana Carolino Reis", "Ma. Juliana Martellet Job",
-      "Junes Wünsch Demo", "Dra. Lucimar de Fátima dos S. Vieira",
-      "Dr. Mário Luiz Lopes Reiss", "Thauana Cardozo Luft"
+      "Dr. Fernando Dornelles", "Ma. Eloísa Maria Adami Giazzon",
+      "Ma. Jocelei Teresa Bresolin", "Dra. Lucimar de Fátima dos S. Vieira",
+      "Dr. Eliseu José Weber", "Me. Eduardo Bonow Simões",
+      "Ma. Juliana Martellet Job", "Dr. Mário Luiz Lopes Reiss",
+      "Dra. Ana Karin Nunes", "Dra. Ana Carolina Badalotti Passuello",
+      "Juliana Carolino Reis", "Arthur Henrique Bach",
+      "Dra. Bárbara Maria Giaccom Ribeiro", "Dr. Clódis de Oliveira Andrades Filho",
+      "Junes Wünsch Demo", "Thauana Cardozo Luft"
     ],
     pmpa: ["André Machado — DEMHAB", "Evaldo Rodrigues de Oliveira Júnior — Defesa Civil Municipal"]
   };
