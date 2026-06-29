@@ -314,28 +314,55 @@
       ${medHtml}`;
   }
 
-  const maxP = Math.max(...D.regioes.map(r => r.pessoas));
-  const markers = [];
-  const markerById = {};
-  D.regioes.forEach(r => {
-    const radius = 14 + 26 * Math.sqrt(r.pessoas / maxP);
-    const m = L.circleMarker([r.lat, r.lng], {
-      radius, color: "#0c2a22", weight: 1.5, fillColor: r.cor, fillOpacity: .8
-    }).addTo(map);
-    m.bindPopup(`<b>${r.nome}</b><br>${r.setores} setores · ${NUM.format(r.pessoas)} pessoas`);
-    m.on("click", () => showSide(r));
-    m.on("mouseover", () => m.setStyle({ fillOpacity: 1 }));
-    m.on("mouseout", () => m.setStyle({ fillOpacity: .8 }));
-    markers.push([r.lat, r.lng]);
-    markerById[r.id] = { marker: m, regiao: r };
-  });
-  map.fitBounds(markers, { padding: [40, 40] });
+  // Cores por grau de risco
+  function corGrau(grau) { return /Muito/.test(grau) ? "#d73027" : "#f0a847"; }
+  function regiaoPorNomeBairro(b) {
+    return D.regioes.find(r => r.nome === regiaoDoBairro(b));
+  }
+
+  // Legenda
+  const legenda = L.control({ position: "bottomleft" });
+  legenda.onAdd = function () {
+    const div = L.DomUtil.create("div", "map-legenda");
+    div.innerHTML = `<span><i style="background:#d73027"></i> Risco Muito Alto (R4)</span><span><i style="background:#f0a847"></i> Risco Alto (R3)</span>`;
+    return div;
+  };
+  legenda.addTo(map);
+
+  const regionLayers = {}; // id -> array de layers
+  let setoresLayer = null;
+
+  fetch("assets/data/setores.geojson")
+    .then(res => res.json())
+    .then(geo => {
+      setoresLayer = L.geoJSON(geo, {
+        style: (f) => ({ color: "#7a1f1a", weight: .7, fillColor: corGrau(f.properties.grau), fillOpacity: .55 }),
+        onEachFeature: (f, layer) => {
+          const p = f.properties;
+          const reg = regiaoPorNomeBairro(p.bairro);
+          if (reg) (regionLayers[reg.id] = regionLayers[reg.id] || []).push(layer);
+          layer.bindPopup(
+            `<b>Setor ${p.setor}</b> · ${p.bairro}<br>${p.grau} risco` +
+            (p.pessoas != null ? `<br>${NUM.format(p.pessoas)} pessoas · ${NUM.format(p.edif)} edificações` : "")
+          );
+          layer.on("click", () => { if (reg) showSide(reg); });
+          layer.on("mouseover", () => layer.setStyle({ fillOpacity: .8, weight: 1.5 }));
+          layer.on("mouseout", () => setoresLayer.resetStyle(layer));
+        }
+      }).addTo(map);
+      map.fitBounds(setoresLayer.getBounds(), { padding: [30, 30] });
+    })
+    .catch(() => { map.setView([-30.03, -51.19], 11); });
 
   // Foco em uma região (chamado pelos cards)
   window.focusRegiao = function (id) {
-    const entry = markerById[id]; if (!entry) return;
-    map.setView([entry.regiao.lat, entry.regiao.lng], 13, { animate: true });
-    entry.marker.openPopup();
-    showSide(entry.regiao);
+    const reg = D.regioes.find(r => r.id === id); if (!reg) return;
+    const layers = regionLayers[id];
+    if (layers && layers.length) {
+      map.fitBounds(L.featureGroup(layers).getBounds(), { padding: [40, 40], maxZoom: 15 });
+    } else {
+      map.setView([reg.lat, reg.lng], 13, { animate: true });
+    }
+    showSide(reg);
   };
 })();
