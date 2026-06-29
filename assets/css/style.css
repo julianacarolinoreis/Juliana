@@ -276,6 +276,23 @@ a { color: inherit; text-decoration: none; }
 .map-side__med li { display: flex; justify-content: space-between; gap: 10px; font-size: .82rem; border-bottom: 1px dashed var(--line); padding-bottom: 6px; }
 .map-side__med b { color: var(--green-700); font-family: "Sora"; white-space: nowrap; }
 
+/* ===== Porto Alegre em números ===== */
+.cidade { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: center; margin-top: 34px; padding: 22px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+.cidade__item { text-align: center; padding: 0 20px; }
+.cidade__item b { display: block; font-family: "Sora"; font-size: 1.6rem; color: var(--green-700); }
+.cidade__item span { font-size: .82rem; color: var(--ink-soft); }
+.cidade__fonte { width: 100%; text-align: center; font-size: .75rem; color: var(--ink-soft); margin-top: 4px; }
+
+/* ===== Equipe ===== */
+.equipe { display: grid; gap: 20px; }
+.equipe__bloco { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 26px; box-shadow: var(--shadow); }
+.equipe__bloco--coord { border-left: 4px solid var(--amber); }
+.equipe__bloco h3 { font-size: 1rem; color: var(--green-800); margin-bottom: 14px; }
+.equipe__bloco ul { list-style: none; display: grid; gap: 8px; }
+.equipe__bloco ul.equipe__cols { grid-template-columns: repeat(3, 1fr); }
+.equipe__bloco li { font-size: .9rem; color: var(--ink); position: relative; padding-left: 16px; }
+.equipe__bloco li::before { content: "•"; position: absolute; left: 0; color: var(--green-500); }
+
 /* ===== Animations ===== */
 @keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
 @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
@@ -288,6 +305,11 @@ a { color: inherit; text-decoration: none; }
   .timeline, .produtos, .contatos, .criterios, .regioes, .processo,
   .processos-grid, .soluo-grid { grid-template-columns: repeat(2, 1fr); }
   .materiais, .solucoes-2 { grid-template-columns: 1fr; }
+  .equipe__bloco ul.equipe__cols { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .equipe__bloco ul.equipe__cols { grid-template-columns: 1fr; }
+  .cidade__item { padding: 0 10px; }
 }
 @media (max-width: 900px) {
   .nav__links { position: fixed; top: 60px; right: 0; left: 0; flex-direction: column; background: #fff; padding: 18px 22px; gap: 14px; box-shadow: var(--shadow); transform: translateY(-130%); transition: transform .3s; }

@@ -29,6 +29,7 @@
         <a href="#mapa">Mapa</a>
         <a href="#acoes">Medidas</a>
         <a href="#solucoes">Soluções</a>
+        <a href="#equipe">Equipe</a>
         <a href="#protecao">Proteção</a>
       </nav>
       <button class="nav__toggle" id="navToggle" aria-label="Abrir menu">☰</button>
@@ -90,6 +91,7 @@
         </p>
       </div>
       <div class="timeline" id="timeline"></div>
+      <div class="cidade" id="cidade"></div>
     </div>
   </section>
 
@@ -209,20 +211,17 @@
         </p>
       </div>
 
-      <div class="card">
-        <div class="card__head-row">
-          <h3>Por medida estrutural</h3>
-          <div class="toggle" id="acoesToggle">
-            <button class="toggle__btn is-active" data-metric="domicilios">Domicílios</button>
-            <button class="toggle__btn" data-metric="custo">Investimento</button>
-          </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Para onde vai o investimento</h3>
+          <div class="chart-wrap"><canvas id="chartCategoria"></canvas></div>
+          <p class="card__note">Investimento estimado por tipo de obra.</p>
         </div>
-        <div class="chart-legend">
-          <span><i style="background:#1b7a5a"></i> Medidas hidrológicas (drenagem, controle de cheias)</span>
-          <span><i style="background:#b5651d"></i> Medidas geotécnicas (contenção de encostas)</span>
+        <div class="card">
+          <h3>Investimento por bairro</h3>
+          <div class="chart-wrap"><canvas id="chartBairro"></canvas></div>
+          <p class="card__note">Soma das medidas estruturais previstas em cada bairro.</p>
         </div>
-        <div class="chart-wrap chart-wrap--tall"><canvas id="chartMedidas"></canvas></div>
-        <p class="card__note">Cada barra é uma das 24 medidas estruturais priorizadas. Estimativas do relatório PMRR-POA.</p>
       </div>
 
       <div class="factbar">
@@ -314,6 +313,34 @@
         </p>
       </div>
       <div class="produtos" id="produtos-grid"></div>
+    </div>
+  </section>
+
+  <!-- EQUIPE -->
+  <section class="section" id="equipe">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__tag">Quem fez</span>
+        <h2>A equipe do PMRR</h2>
+        <p class="section__intro">
+          O plano foi elaborado pela Universidade Federal do Rio Grande do Sul, com
+          acompanhamento da Prefeitura Municipal de Porto Alegre.
+        </p>
+      </div>
+      <div class="equipe">
+        <div class="equipe__bloco equipe__bloco--coord">
+          <h3>Coordenação</h3>
+          <ul id="equipe-coord"></ul>
+        </div>
+        <div class="equipe__bloco">
+          <h3>Equipe da Universidade (UFRGS)</h3>
+          <ul id="equipe-univ" class="equipe__cols"></ul>
+        </div>
+        <div class="equipe__bloco">
+          <h3>Acompanhamento — Prefeitura (PMPA)</h3>
+          <ul id="equipe-pmpa"></ul>
+        </div>
+      </div>
     </div>
   </section>
 

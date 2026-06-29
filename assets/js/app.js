@@ -148,6 +148,19 @@
   [filtroRegiao, filtroTipo, filtroGrau].forEach(s => s.addEventListener("change", renderTabela));
   renderTabela();
 
+  // Porto Alegre em números
+  const c = D.cidade;
+  document.getElementById("cidade").innerHTML = `
+    <div class="cidade__item"><b>${NUM.format(c.area)} km²</b><span>de área territorial</span></div>
+    <div class="cidade__item"><b>${NUM.format(c.populacao)}</b><span>habitantes</span></div>
+    <div class="cidade__item"><b>${NUM.format(c.densidade)}</b><span>hab./km²</span></div>
+    <p class="cidade__fonte">Porto Alegre — IBGE, 2022</p>`;
+
+  // Equipe
+  document.getElementById("equipe-coord").innerHTML = D.equipe.coordenacao.map(n => `<li>${n}</li>`).join("");
+  document.getElementById("equipe-univ").innerHTML = D.equipe.universidade.map(n => `<li>${n}</li>`).join("");
+  document.getElementById("equipe-pmpa").innerHTML = D.equipe.pmpa.map(n => `<li>${n}</li>`).join("");
+
   // Footer
   document.getElementById("footerCreditos").textContent =
     `${D.creditos.instituicao} · ${D.creditos.parceria} · ${D.creditos.periodo}.`;
@@ -228,54 +241,43 @@
       }
     });
 
-    buildMedidasChart("domicilios");
-  }
-
-  // Chart das medidas (toggle domicílios/custo)
-  let medidasChart = null;
-  function buildMedidasChart(metric) {
-    const rows = [...D.medidas].sort((a, b) => b[metric] - a[metric]);
-    const isCusto = metric === "custo";
-    const data = {
-      // rótulo em duas linhas: intervenção (nome real) + local
-      labels: rows.map(m => [m.intervencao, m.local]),
-      datasets: [{
-        label: isCusto ? "Investimento" : "Domicílios",
-        data: rows.map(m => m[metric]),
-        backgroundColor: rows.map(m => m.tipo === "G" ? "#b5651d" : "#1b7a5a"),
-        borderRadius: 4
-      }]
-    };
-    const opts = {
-      indexAxis: "y", responsive: true, maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: { callbacks: {
-          title: (items) => rows[items[0].dataIndex].intervencao,
-          label: (c) => isCusto ? " " + BRL.format(rows[c.dataIndex].custo) : " " + rows[c.dataIndex].domicilios + " domicílios beneficiados",
-          afterLabel: (c) => {
-            const m = rows[c.dataIndex];
-            const tipo = m.tipo === "G" ? "medida geotécnica" : "medida hidrológica";
-            return `${m.local}\n${m.grau === "R4" ? "Risco Muito Alto (R4)" : "Risco Alto (R3)"} · ${tipo}`;
-          }
-        } }
-      },
-      scales: {
-        x: { beginAtZero: true, grid: { color: "#eef0ec" },
-          ticks: { callback: (v) => isCusto ? "R$ " + (v / 1e6).toFixed(0) + "M" : v } },
-        y: { grid: { display: false }, ticks: { font: { size: 9 }, autoSkip: false } }
+    // Investimento por tipo de obra (categoria) — doughnut
+    const porCat = {};
+    D.medidas.forEach(m => { porCat[m.categoria] = (porCat[m.categoria] || 0) + m.custo; });
+    const cats = Object.entries(porCat).sort((a, b) => b[1] - a[1]);
+    const coresCat = ["#1b7a5a", "#2f8f9d", "#b5651d", "#6a994e", "#e8a317", "#9b6a9e"];
+    new Chart(document.getElementById("chartCategoria"), {
+      type: "doughnut",
+      data: { labels: cats.map(c => c[0]), datasets: [{ data: cats.map(c => c[1]), backgroundColor: coresCat, borderWidth: 2, borderColor: "#fff" }] },
+      options: {
+        responsive: true, maintainAspectRatio: false, cutout: "58%",
+        plugins: {
+          legend: { position: "bottom", labels: { padding: 14, usePointStyle: true, font: { size: 11 } } },
+          tooltip: { callbacks: { label: (c) => " " + BRL.format(c.raw) } }
+        }
       }
-    };
-    if (medidasChart) { medidasChart.data = data; medidasChart.options = opts; medidasChart.update(); }
-    else medidasChart = new Chart(document.getElementById("chartMedidas"), { type: "bar", data, options: opts });
-  }
+    });
 
-  document.getElementById("acoesToggle").addEventListener("click", (e) => {
-    const btn = e.target.closest(".toggle__btn"); if (!btn) return;
-    document.querySelectorAll("#acoesToggle .toggle__btn").forEach(b => b.classList.remove("is-active"));
-    btn.classList.add("is-active");
-    buildMedidasChart(btn.dataset.metric);
-  });
+    // Investimento por bairro — horizontal bar
+    const porBairro = {};
+    D.medidas.forEach(m => {
+      const b = m.bairro.split("/")[0].trim().replace("Cel.", "Cel.");
+      porBairro[b] = (porBairro[b] || 0) + m.custo;
+    });
+    const bairros = Object.entries(porBairro).sort((a, b) => b[1] - a[1]);
+    new Chart(document.getElementById("chartBairro"), {
+      type: "bar",
+      data: { labels: bairros.map(b => b[0]), datasets: [{ data: bairros.map(b => b[1]), backgroundColor: "#1b7a5a", borderRadius: 5 }] },
+      options: {
+        indexAxis: "y", responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => " " + BRL.format(c.raw) } } },
+        scales: {
+          x: { beginAtZero: true, grid: { color: "#eef0ec" }, ticks: { callback: (v) => "R$ " + (v / 1e6).toFixed(0) + "M" } },
+          y: { grid: { display: false }, ticks: { font: { size: 11 } } }
+        }
+      }
+    });
+  }
 
   const chartObs = new IntersectionObserver((entries) => {
     if (entries.some(en => en.isIntersecting)) { buildCharts(); chartObs.disconnect(); }
