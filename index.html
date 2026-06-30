@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PMRR Porto Alegre — Plano Municipal de Redução de Riscos</title>
-  <meta name="description" content="Dados e resultados do Plano Municipal de Redução de Riscos de Porto Alegre: mapeamento dos setores de risco geo-hidrológico, vulnerabilidade social e ações propostas." />
+  <title>Plano Municipal de Redução de Riscos de Porto Alegre</title>
+  <meta name="description" content="Dados e resultados do Plano Municipal de Redução de Riscos de Porto Alegre: áreas prioritárias, mapeamento dos setores de risco e medidas propostas." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="assets/vendor/leaflet.css" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/style.css?v=8" />
 </head>
 <body>
+  <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
 
   <!-- NAV -->
   <header class="nav" id="nav">
@@ -25,9 +26,11 @@
       <nav class="nav__links" id="navLinks">
         <a href="#sobre">O Plano</a>
         <a href="#risco">O risco</a>
+        <a href="#areas">Áreas</a>
         <a href="#mapa">Mapa</a>
-        <a href="#acoes">Ações</a>
-        <a href="#produtos">Produtos</a>
+        <a href="#acoes">Medidas</a>
+        <a href="#solucoes">Soluções</a>
+        <a href="#equipe">Equipe</a>
         <a href="#protecao">Proteção</a>
       </nav>
       <button class="nav__toggle" id="navToggle" aria-label="Abrir menu">☰</button>
@@ -38,11 +41,11 @@
   <section class="hero" id="inicio">
     <div class="hero__bg"></div>
     <div class="hero__content">
-      <p class="hero__eyebrow">Plano Municipal de Redução de Riscos</p>
-      <h1 class="hero__title">Porto Alegre frente aos<br /><span>riscos geo-hidrológicos</span></h1>
+      <p class="hero__eyebrow">Porto Alegre · PMRR</p>
+      <h1 class="hero__title">Plano Municipal de<br /><span>Redução de Riscos</span></h1>
       <p class="hero__lead">
-        Mapeamento dos setores de risco, perfil dos territórios e ações propostas para
-        reduzir os impactos de enchentes, enxurradas e deslizamentos na cidade.
+        Mapeamento dos riscos, definição das áreas prioritárias e medidas propostas
+        para reduzir os impactos de inundações, enxurradas e movimentos de massa.
       </p>
       <div class="hero__cta">
         <a href="#risco" class="btn btn--primary">Ver os dados</a>
@@ -52,24 +55,26 @@
     <a href="#sobre" class="hero__scroll" aria-label="Rolar para baixo">↓</a>
   </section>
 
+  <main id="conteudo">
+
   <!-- FAIXA DE NÚMEROS -->
   <section class="stats" id="numeros">
     <div class="stats__grid container">
       <div class="stat">
-        <span class="stat__num" data-count="333">0</span>
-        <span class="stat__label">setores de risco identificados</span>
+        <span class="stat__num" data-count="204">0</span>
+        <span class="stat__label">setores de risco mapeados</span>
       </div>
       <div class="stat">
-        <span class="stat__num" data-count="80" data-suffix="%">0</span>
-        <span class="stat__label">em vilas e comunidades urbanas</span>
+        <span class="stat__num" data-count="8591">0</span>
+        <span class="stat__label">pessoas em risco (estimativa)</span>
       </div>
       <div class="stat">
-        <span class="stat__num" data-count="17">0</span>
-        <span class="stat__label">setores prioritários detalhados</span>
+        <span class="stat__num" data-count="3438">0</span>
+        <span class="stat__label">edificações em risco (estimativa)</span>
       </div>
       <div class="stat">
-        <span class="stat__num" data-count="1516" data-plus="true">0</span>
-        <span class="stat__label">domicílios beneficiados (estimativa)</span>
+        <span class="stat__num" data-count="4">0</span>
+        <span class="stat__label">regiões prioritárias</span>
       </div>
     </div>
   </section>
@@ -81,13 +86,15 @@
         <span class="section__tag">O Plano</span>
         <h2>O que é o PMRR</h2>
         <p class="section__intro">
-          O Plano Municipal de Redução de Riscos (PMRR) reúne o mapeamento das áreas de
-          risco de Porto Alegre e propõe medidas para reduzir os danos causados por
-          eventos geo-hidrológicos. O trabalho foi desenvolvido pela UFRGS em parceria
-          com o Ministério das Cidades e a Fiocruz, e está organizado em quatro etapas.
+          O Plano Municipal de Redução de Riscos (PMRR) revisa e detalha o mapeamento
+          dos riscos geológicos e hidrológicos em áreas prioritárias de Porto Alegre e
+          propõe medidas para reduzir os danos de desastres. Foi realizado pela UFRGS em
+          parceria com a Secretaria Nacional de Periferias (Ministério das Cidades) e
+          apoio da Prefeitura, em quatro etapas.
         </p>
       </div>
       <div class="timeline" id="timeline"></div>
+      <div class="cidade" id="cidade"></div>
     </div>
   </section>
 
@@ -96,43 +103,136 @@
     <div class="container">
       <div class="section__head">
         <span class="section__tag">O risco em números</span>
-        <h2>Onde e como o risco se distribui</h2>
+        <h2>O que o mapeamento revelou</h2>
         <p class="section__intro">
-          Em 2025 foram identificados <strong>333 setores de risco geo-hidrológico</strong>
-          em Porto Alegre, classificados por tipo de processo predominante.
+          Nas áreas prioritárias foram mapeados <strong>204 setores de risco</strong>,
+          classificados por tipo de processo e por grau de risco.
         </p>
       </div>
 
       <div class="grid-2">
         <div class="card">
-          <h3>Tipologia dos setores de risco</h3>
+          <h3>Tipologia dos processos perigosos</h3>
           <div class="chart-wrap"><canvas id="chartTipologia"></canvas></div>
-          <p class="card__note">Total de 333 setores (SGB, 2022; PMRR/PMPA, 2025).</p>
+          <p class="card__note">204 setores de risco mapeados nas áreas prioritárias.</p>
         </div>
         <div class="card">
-          <h3>Vulnerabilidade social nas áreas de risco</h3>
-          <div class="chart-wrap"><canvas id="chartIVS"></canvas></div>
-          <p class="card__note">
-            317 setores censitários com dados válidos que intersectam áreas de risco,
-            por faixa do Índice de Vulnerabilidade Social — IVS (IBGE, 2022).
-          </p>
+          <h3>Setores por grau de risco</h3>
+          <div class="chart-wrap"><canvas id="chartGrau"></canvas></div>
+          <p class="card__note">Classificação em Risco Alto (R3) e Muito Alto (R4).</p>
         </div>
       </div>
 
       <div class="factbar">
         <div class="fact">
-          <span class="fact__num">0,293</span>
-          <span class="fact__txt">IVS médio nas áreas de risco, ante 0,246 no restante do município</span>
+          <span class="fact__num" data-count="8591">0</span>
+          <span class="fact__txt">pessoas vivem em áreas de risco mapeadas</span>
         </div>
         <div class="fact">
-          <span class="fact__num" data-count="266">0</span>
-          <span class="fact__txt">dos 333 setores estão associados a vilas e comunidades urbanas</span>
+          <span class="fact__num" data-count="3438">0</span>
+          <span class="fact__txt">edificações estão em situação de risco</span>
         </div>
         <div class="fact">
-          <span class="fact__num" data-count="183">0</span>
-          <span class="fact__txt">setores têm processos hidrológicos como risco predominante</span>
+          <span class="fact__num" data-count="35">0</span>
+          <span class="fact__txt">setores classificados como risco muito alto (R4)</span>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- PERFIL DO TERRITÓRIO (CENSO 2022) -->
+  <section class="section" id="perfil">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__tag">Perfil do território</span>
+        <h2>Quem vive nas áreas de risco</h2>
+        <p class="section__intro">
+          Cruzando os setores de risco com o <strong>Censo Demográfico 2022 (IBGE)</strong>,
+          é possível conhecer o perfil social desses territórios. Foram analisados
+          <strong>317 setores censitários</strong> com dados válidos em área de risco.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Vulnerabilidade social (IVS)</h3>
+          <div class="ivs-compara">
+            <div class="ivs-bloco ivs-bloco--risco">
+              <span class="ivs-num" data-count="293" data-decimal="3">0</span>
+              <span class="ivs-leg">Áreas de risco</span>
+            </div>
+            <div class="ivs-bloco">
+              <span class="ivs-num" data-count="246" data-decimal="3">0</span>
+              <span class="ivs-leg">Restante do município</span>
+            </div>
+          </div>
+          <p class="card__note">
+            O Índice de Vulnerabilidade Social médio nas áreas de risco é
+            <strong>19% maior</strong> que no restante de Porto Alegre
+            (escala de 0 a 1 — quanto maior, mais vulnerável).
+          </p>
+        </div>
+        <div class="card">
+          <h3>Setores por faixa de vulnerabilidade</h3>
+          <div class="chart-wrap"><canvas id="chartIvs"></canvas></div>
+          <p class="card__note">
+            <strong>33,4%</strong> dos setores em área de risco (106 de 317) estão nas
+            faixas de vulnerabilidade média, alta ou muito alta.
+          </p>
+        </div>
+      </div>
+
+      <div class="card infra-card">
+        <h3>Infraestrutura urbana nas áreas de risco</h3>
+        <p class="card__lead">
+          Comparação entre os setores em área de risco e os demais setores do município,
+          a partir do Censo Demográfico 2022 (IBGE).
+        </p>
+        <div class="infra" id="infra"></div>
+        <p class="infra-legenda">
+          <span><i class="infra-dot infra-dot--risco"></i> Áreas de risco</span>
+          <span><i class="infra-dot infra-dot--resto"></i> Demais setores do município</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESSOS PERIGOSOS -->
+  <section class="section" id="processos">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__tag">Entenda</span>
+        <h2>Os processos perigosos</h2>
+        <p class="section__intro">
+          São fenômenos que causam danos quando ocorrem em áreas com moradias e
+          infraestrutura. Conhecer cada um ajuda a se prevenir e a se proteger.
+        </p>
+      </div>
+      <div class="processos-grid" id="processos-perigosos"></div>
+    </div>
+  </section>
+
+  <!-- ÁREAS PRIORITÁRIAS -->
+  <section class="section section--alt" id="areas">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__tag">Onde atuamos</span>
+        <h2>Áreas prioritárias e como foram escolhidas</h2>
+        <p class="section__intro">
+          O mapeamento detalhado foi feito em <strong>áreas prioritárias pré-definidas</strong>,
+          distribuídas em <strong>quatro regiões</strong> de Porto Alegre — das ilhas do
+          Arquipélago à zona norte e aos bairros de morro da zona leste e do Partenon.
+        </p>
+      </div>
+
+      <h3 class="block-title">Critérios de seleção</h3>
+      <div class="criterios" id="criterios-grid"></div>
+
+      <h3 class="block-title">As quatro regiões prioritárias</h3>
+      <div class="regioes" id="regioes-grid"></div>
+
+      <h3 class="block-title">O caminho percorrido</h3>
+      <div class="processo" id="processo-grid"></div>
     </div>
   </section>
 
@@ -141,77 +241,215 @@
     <div class="container">
       <div class="section__head">
         <span class="section__tag">Mapa interativo</span>
-        <h2>Setores prioritários no território</h2>
+        <h2>Os setores de risco no território</h2>
         <p class="section__intro">
-          Localização aproximada dos setores de risco hidrológico detalhados na Etapa 3.
-          Clique nos pontos para ver os dados de cada setor. O tamanho do círculo
-          representa o número de domicílios na área de influência.
+          Cada área colorida é um <strong>setor de risco</strong> mapeado, com seus
+          contornos reais. As cores indicam o grau de risco. Clique em um setor para ver
+          os dados; clique nos cards das regiões para dar zoom em cada área.
         </p>
+      </div>
+      <div class="map-busca">
+        <input id="mapSearch" type="search" placeholder="Buscar por bairro ou número do setor (ex.: Bom Jesus, 109)" aria-label="Buscar setor no mapa" />
       </div>
       <div class="map-layout">
         <div id="map" class="map"></div>
         <aside class="map-side" id="mapSide">
-          <div class="map-side__empty">Selecione um setor no mapa para ver os detalhes.</div>
+          <div class="map-side__empty">Selecione uma região no mapa para ver os detalhes.</div>
         </aside>
       </div>
-      <p class="card__note">Localizações ilustrativas e aproximadas por bairro — não representam os limites exatos dos setores.</p>
+      <p class="card__note">Contornos reais dos 204 setores de risco prioritários (mapeamento PMRR-POA, em coordenadas geográficas).</p>
     </div>
   </section>
 
-  <!-- AÇÕES / INVESTIMENTO -->
+  <!-- REGISTROS DE CAMPO -->
+  <section class="section" id="campo">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__tag">Registros de campo</span>
+        <h2>O território de perto</h2>
+        <p class="section__intro">
+          Imagens das caminhadas comunitárias e inspeções técnicas, que combinaram o
+          conhecimento dos moradores com a avaliação da equipe.
+        </p>
+      </div>
+      <div class="gal-filtros" id="galeria-filtros"></div>
+      <div class="galeria" id="galeria-grid"></div>
+    </div>
+  </section>
+
+  <!-- MEDIDAS / INVESTIMENTO -->
   <section class="section section--alt" id="acoes">
     <div class="container">
       <div class="section__head">
-        <span class="section__tag">Ações propostas</span>
-        <h2>Domicílios beneficiados e investimento estimado</h2>
+        <span class="section__tag">Medidas propostas</span>
+        <h2>Intervenções estruturais priorizadas</h2>
         <p class="section__intro">
-          Para os setores prioritários, o plano detalha intervenções estruturais
-          (drenagem, bacias de amortecimento, estabilização de margens, melhoria de
-          acessos) com estimativas preliminares de alcance e custo.
+          O plano detalha <strong>24 medidas estruturais</strong> (drenagem, contenção,
+          bacias de amortecimento, estabilização de margens), priorizadas por grau de
+          risco e custo-benefício, com estimativas de alcance e investimento.
         </p>
       </div>
 
-      <div class="card">
-        <div class="card__head-row">
-          <h3>Por setor de risco</h3>
-          <div class="toggle" id="acoesToggle">
-            <button class="toggle__btn is-active" data-metric="domicilios">Domicílios</button>
-            <button class="toggle__btn" data-metric="custo">Investimento</button>
-          </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Para onde vai o investimento</h3>
+          <div class="chart-wrap"><canvas id="chartCategoria"></canvas></div>
+          <p class="card__note">Investimento estimado por tipo de obra.</p>
         </div>
-        <div class="chart-wrap chart-wrap--tall"><canvas id="chartSetores"></canvas></div>
-        <p class="card__note">Estimativas preliminares (Relatório PMRR, Etapa 3 — em elaboração).</p>
+        <div class="card">
+          <h3>Investimento por bairro</h3>
+          <div class="chart-wrap"><canvas id="chartBairro"></canvas></div>
+          <p class="card__note">Soma das medidas estruturais previstas em cada bairro.</p>
+        </div>
       </div>
 
       <div class="factbar">
         <div class="fact">
-          <span class="fact__num" data-count="1516" data-plus="true">0</span>
-          <span class="fact__txt">domicílios beneficiados nos setores prioritários</span>
-        </div>
-        <div class="fact">
           <span class="fact__num" id="investimentoTotal">R$ 0</span>
-          <span class="fact__txt">investimento total estimado nas intervenções</span>
+          <span class="fact__txt">investimento total estimado nas medidas estruturais</span>
         </div>
         <div class="fact">
-          <span class="fact__num" data-count="16">0</span>
-          <span class="fact__txt">setores com orçamento estimado disponível</span>
+          <span class="fact__num" data-count="1623">0</span>
+          <span class="fact__txt">domicílios diretamente beneficiados</span>
+        </div>
+        <div class="fact">
+          <span class="fact__num" id="custoMedio">R$ 0</span>
+          <span class="fact__txt">custo médio por família atendida</span>
+        </div>
+      </div>
+
+      <div class="card tabela-card">
+        <div class="card__head-row">
+          <h3>Todas as 24 medidas</h3>
+          <div class="filtros" id="medidasFiltros">
+            <select id="filtroRegiao" class="filtro"></select>
+            <select id="filtroTipo" class="filtro">
+              <option value="">Todos os tipos</option>
+              <option value="H">Hidrológicas</option>
+              <option value="G">Geotécnicas</option>
+            </select>
+            <select id="filtroGrau" class="filtro">
+              <option value="">Todos os graus</option>
+              <option value="R4">Muito Alto (R4)</option>
+              <option value="R3">Alto (R3)</option>
+            </select>
+          </div>
+        </div>
+        <div class="tabela-wrap">
+          <table class="tabela" id="tabelaMedidas">
+            <thead>
+              <tr>
+                <th>Intervenção</th><th>Local</th><th>Grau</th>
+                <th class="num">Domicílios</th><th class="num">Investimento</th>
+              </tr>
+            </thead>
+            <tbody id="tabelaMedidasBody"></tbody>
+          </table>
+        </div>
+        <p class="card__note" id="tabelaResumo"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUÇÕES -->
+  <section class="section" id="solucoes">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__tag">Soluções</span>
+        <h2>Como reduzir os riscos</h2>
+        <p class="section__intro">
+          A redução dos riscos combina <strong>medidas estruturais</strong> (obras) e
+          <strong>medidas não estruturais</strong> (gestão, alerta e organização
+          comunitária), com a participação das comunidades em todas as etapas.
+        </p>
+      </div>
+
+      <h3 class="block-title">Medidas estruturais (obras)</h3>
+      <div class="soluo-grid" id="solucoes-estruturais"></div>
+
+      <div class="grid-2 solucoes-2">
+        <div class="card">
+          <h3>Medidas não estruturais</h3>
+          <ul class="lista-check" id="solucoes-nao-estruturais"></ul>
+        </div>
+        <div class="card">
+          <h3>Como a comunidade pode participar</h3>
+          <div class="particip" id="participacao-grid"></div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- PRODUTOS -->
-  <section class="section" id="produtos">
+  <section class="section section--alt" id="produtos">
     <div class="container">
       <div class="section__head">
         <span class="section__tag">O que produzimos</span>
         <h2>Produtos do PMRR</h2>
         <p class="section__intro">
-          Além do diagnóstico técnico, o plano gera materiais voltados à comunicação e
-          à educação para a redução de riscos.
+          Além do diagnóstico técnico, o plano gera materiais de comunicação e propostas
+          de ação para a gestão pública e para as comunidades.
         </p>
       </div>
       <div class="produtos" id="produtos-grid"></div>
+    </div>
+  </section>
+
+  <!-- EQUIPE -->
+  <section class="section" id="equipe">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__tag">Quem fez</span>
+        <h2>A equipe do PMRR</h2>
+        <p class="section__intro">
+          O plano foi elaborado pela Universidade Federal do Rio Grande do Sul, com
+          acompanhamento da Prefeitura Municipal de Porto Alegre.
+        </p>
+      </div>
+      <div class="equipe">
+        <div class="equipe__bloco equipe__bloco--coord">
+          <h3>Coordenação</h3>
+          <ul id="equipe-coord"></ul>
+        </div>
+        <div class="equipe__bloco">
+          <h3>Equipe da Universidade (UFRGS)</h3>
+          <ul id="equipe-univ" class="equipe__cols"></ul>
+        </div>
+        <div class="equipe__bloco">
+          <h3>Acompanhamento — Prefeitura (PMPA)</h3>
+          <ul id="equipe-pmpa"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO AGIR -->
+  <section class="section section--alt" id="agir">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__tag">Como agir</span>
+        <h2>Antes, durante e depois</h2>
+        <p class="section__intro">
+          Orientações práticas para se proteger em cada tipo de situação. Em emergência,
+          procure sempre a Defesa Civil.
+        </p>
+      </div>
+      <div class="guia-tabs" id="guia-tabs"></div>
+      <div class="guia-conteudo" id="guia-conteudo"></div>
+    </div>
+  </section>
+
+  <!-- GLOSSÁRIO -->
+  <section class="section" id="glossario">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__tag">Glossário</span>
+        <h2>Entenda os termos</h2>
+        <p class="section__intro">
+          Um guia rápido das palavras usadas no Plano para falar de risco, ameaças e medidas.
+        </p>
+      </div>
+      <div class="glossario" id="glossario-grid"></div>
     </div>
   </section>
 
@@ -229,9 +467,23 @@
       <ul class="dicas">
         <li>Em chuva forte, evite encostas, margens de arroios e áreas que costumam alagar.</li>
         <li>Não atravesse ruas alagadas a pé ou de carro — a correnteza pode arrastar.</li>
-        <li>Mantenha bueiros e valas livres de lixo para não obstruir a drenagem.</li>
-        <li>Conheça as rotas de fuga e os pontos de apoio da sua comunidade.</li>
+        <li>Não jogue lixo ou entulho em arroios, valas e bocas de lobo.</li>
+        <li>Comunique à Defesa Civil rachaduras, barrancos instáveis e entulho nos arroios.</li>
       </ul>
+    </div>
+  </section>
+
+  <!-- PERGUNTAS FREQUENTES -->
+  <section class="section section--alt" id="duvidas">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__tag">Perguntas frequentes</span>
+        <h2>Dúvidas comuns</h2>
+        <p class="section__intro">
+          Respostas rápidas sobre o Plano, as áreas de risco e o que a população pode fazer.
+        </p>
+      </div>
+      <div class="faq" id="faq-grid"></div>
     </div>
   </section>
 
@@ -246,6 +498,18 @@
     </div>
   </section>
 
+    <!-- REALIZAÇÃO E PARCERIA -->
+    <section class="parceiros" id="parceiros">
+      <div class="container">
+        <p class="parceiros__titulo">Realização e parceria</p>
+        <div class="parceiros__faixa">
+          <img src="assets/img/logos/parceiros.png?v=1" alt="PMRR Porto Alegre, UFRGS, Prefeitura de Porto Alegre, Periferia Sem Risco, Defesa Civil, Ministério da Saúde / Fiocruz e Ministério das Cidades / Governo do Brasil" />
+        </div>
+      </div>
+    </section>
+
+  </main>
+
   <!-- FOOTER -->
   <footer class="footer">
     <div class="container footer__inner">
@@ -254,15 +518,24 @@
         <p class="footer__small" id="footerCreditos"></p>
       </div>
       <div class="footer__sources">
-        <p class="footer__small"><strong>Fontes dos dados:</strong> Serviço Geológico do Brasil (2022), PMRR/PMPA (2025) e Censo Demográfico IBGE (2022).</p>
-        <p class="footer__small">Os valores por setor são estimativas preliminares e podem ser revisados.</p>
+        <p class="footer__small"><strong>Fonte dos dados:</strong> Relatório PMRR Porto Alegre (UFRGS, 2026); mapeamento integrado PMRR-POA, SGB e DEMHAB/PMPA (IBGE, 2022).</p>
+        <p class="footer__small">Os valores são estimativas do relatório técnico.</p>
       </div>
     </div>
   </footer>
 
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox__close" id="lightboxClose" aria-label="Fechar">×</button>
+    <figure class="lightbox__fig">
+      <img id="lightboxImg" src="" alt="" />
+      <figcaption id="lightboxCap"></figcaption>
+    </figure>
+  </div>
+
   <script src="assets/vendor/leaflet.js"></script>
   <script src="assets/vendor/chart.umd.min.js"></script>
-  <script src="assets/js/data.js"></script>
-  <script src="assets/js/app.js"></script>
+  <script src="assets/js/data.js?v=8"></script>
+  <script src="assets/js/app.js?v=8"></script>
 </body>
 </html>
