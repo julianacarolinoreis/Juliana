@@ -195,6 +195,24 @@ window.PMRR = (function () {
   // ===== Processo participativo =====
   const processo = { total: 50, audiencias: 2, oficinas: 33, caminhadas: 15 };
 
+  // ===== Perfil demográfico (Censo 2022 / IBGE) =====
+  // IVS = Índice de Vulnerabilidade Social (faixas oficiais do IPEA, 0 a 1)
+  const demografia = {
+    setores: 317,
+    ivsRisco: 0.293,
+    ivsRestante: 0.246,
+    diferenca: 19,           // % a mais nas áreas de risco
+    mediaAlta: 33.4,         // % em vulnerabilidade média, alta ou muito alta
+    mediaAltaN: 106,
+    faixas: [
+      { faixa: "Muito baixa", intervalo: "0,000–0,200", n: 1,   pct: 0.3 },
+      { faixa: "Baixa",       intervalo: "0,200–0,300", n: 210, pct: 66.2 },
+      { faixa: "Média",       intervalo: "0,300–0,400", n: 86,  pct: 27.1 },
+      { faixa: "Alta",        intervalo: "0,400–0,500", n: 16,  pct: 5.0 },
+      { faixa: "Muito alta",  intervalo: "acima de 0,500", n: 4, pct: 1.3 }
+    ]
+  };
+
   // ===== Medidas estruturais priorizadas (tabela de priorização) =====
   // tipo: G = geotécnica, H = hidrológica
   // intervencao = nome real da obra; categoria = tipo de obra; local = bairro/arroio (com o setor)
@@ -306,7 +324,7 @@ window.PMRR = (function () {
   };
 
   return {
-    sintese, tipologia, regioes, criterios, processo, cidade, galeria, guia,
+    sintese, tipologia, regioes, criterios, processo, demografia, cidade, galeria, guia,
     processosPerigosos, solucoesEstruturais, solucoesNaoEstruturais, participacao,
     medidas, medidasResumo, equipe,
     etapas, produtos, materiais, contatos, creditos

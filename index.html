@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="assets/vendor/leaflet.css" />
-  <link rel="stylesheet" href="assets/css/style.css?v=5" />
+  <link rel="stylesheet" href="assets/css/style.css?v=6" />
 </head>
 <body>
   <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
@@ -140,6 +140,50 @@
     </div>
   </section>
 
+  <!-- PERFIL DO TERRITÓRIO (CENSO 2022) -->
+  <section class="section" id="perfil">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__tag">Perfil do território</span>
+        <h2>Quem vive nas áreas de risco</h2>
+        <p class="section__intro">
+          Cruzando os setores de risco com o <strong>Censo Demográfico 2022 (IBGE)</strong>,
+          é possível conhecer o perfil social desses territórios. Foram analisados
+          <strong>317 setores censitários</strong> com dados válidos em área de risco.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Vulnerabilidade social (IVS)</h3>
+          <div class="ivs-compara">
+            <div class="ivs-bloco ivs-bloco--risco">
+              <span class="ivs-num" data-count="293" data-decimal="3">0</span>
+              <span class="ivs-leg">Áreas de risco</span>
+            </div>
+            <div class="ivs-bloco">
+              <span class="ivs-num" data-count="246" data-decimal="3">0</span>
+              <span class="ivs-leg">Restante do município</span>
+            </div>
+          </div>
+          <p class="card__note">
+            O Índice de Vulnerabilidade Social médio nas áreas de risco é
+            <strong>19% maior</strong> que no restante de Porto Alegre
+            (escala de 0 a 1 — quanto maior, mais vulnerável).
+          </p>
+        </div>
+        <div class="card">
+          <h3>Setores por faixa de vulnerabilidade</h3>
+          <div class="chart-wrap"><canvas id="chartIvs"></canvas></div>
+          <p class="card__note">
+            <strong>33,4%</strong> dos setores em área de risco (106 de 317) estão nas
+            faixas de vulnerabilidade média, alta ou muito alta.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- PROCESSOS PERIGOSOS -->
   <section class="section" id="processos">
     <div class="container">
@@ -193,7 +237,6 @@
       </div>
       <div class="map-busca">
         <input id="mapSearch" type="search" placeholder="Buscar por bairro ou número do setor (ex.: Bom Jesus, 109)" aria-label="Buscar setor no mapa" />
-        <button id="mapGeo" class="btn-geo" type="button">📍 Perto de mim</button>
       </div>
       <div class="map-layout">
         <div id="map" class="map"></div>
@@ -418,12 +461,8 @@
     <section class="parceiros" id="parceiros">
       <div class="container">
         <p class="parceiros__titulo">Realização e parceria</p>
-        <div class="parceiros__logos">
-          <img src="assets/img/logos/pmrr.png" alt="PMRR Porto Alegre" />
-          <img src="assets/img/logos/ufrgs.png" alt="Universidade Federal do Rio Grande do Sul" />
-          <img src="assets/img/logos/mincidades.png" alt="Ministério das Cidades" />
-          <img src="assets/img/logos/periferia.png" alt="Periferia Sem Risco" />
-          <img src="assets/img/logos/prefeitura.png" alt="Prefeitura de Porto Alegre" />
+        <div class="parceiros__faixa">
+          <img src="assets/img/logos/parceiros.png?v=1" alt="PMRR Porto Alegre, UFRGS, Prefeitura de Porto Alegre, Periferia Sem Risco, Defesa Civil, Ministério da Saúde / Fiocruz e Ministério das Cidades / Governo do Brasil" />
         </div>
       </div>
     </section>
@@ -455,7 +494,7 @@
 
   <script src="assets/vendor/leaflet.js"></script>
   <script src="assets/vendor/chart.umd.min.js"></script>
-  <script src="assets/js/data.js?v=5"></script>
-  <script src="assets/js/app.js?v=5"></script>
+  <script src="assets/js/data.js?v=6"></script>
+  <script src="assets/js/app.js?v=6"></script>
 </body>
 </html>

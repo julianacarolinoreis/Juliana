@@ -97,18 +97,21 @@
       <path d="M0 46 q8 -4 16 0 t16 0 t16 0 t16 0 V64 H0Z" fill="#1b7a5a" opacity=".7"/></g></svg>`,
     enxurrada: `<svg viewBox="0 0 64 64" class="psvg" role="img" aria-label="Enxurrada">
       <polygon points="0,52 64,16 64,64 0,64" fill="#b5651d"/><polygon points="0,60 64,28 64,64 0,64" fill="#8a6d3b"/>
-      <g transform="rotate(-29 13 46)"><rect x="8" y="41" width="10" height="8" fill="#e8e2d5"/><polygon points="7,41 13,36 19,41" fill="#9c4f2a"/></g>
-      <g transform="rotate(-29 40 30)"><rect x="35" y="25" width="9" height="7" fill="#e8e2d5"/><polygon points="34,25 39.5,20 45,25" fill="#9c4f2a"/></g>
-      <path d="M64 6 L64 17 L17 55 L12 50 Z" fill="#2f8f9d" opacity=".88"/>
-      <g class="a-torrent2"><circle cx="50" cy="22" r="2.4" fill="#fff" opacity=".9"/>
-      <circle cx="38" cy="32" r="2.6" fill="#dff3ee"/><circle cx="24" cy="46" r="2.3" fill="#fff" opacity=".85"/></g></svg>`,
+      <g transform="rotate(-28 11 49)"><rect x="6" y="44" width="9" height="7" fill="#e8e2d5"/><polygon points="5,44 10.5,39 16,44" fill="#9c4f2a"/></g>
+      <g transform="rotate(-28 22 41)"><rect x="18" y="37" width="8" height="6" fill="#e8e2d5"/><polygon points="17,37 22,32.5 27,37" fill="#9c4f2a"/></g>
+      <g class="a-torrent2" stroke-linecap="round" fill="none">
+        <line x1="60" y1="13" x2="52" y2="24" stroke="#2f8f9d" stroke-width="2.6"/>
+        <line x1="56" y1="18" x2="48" y2="29" stroke="#1b7a5a" stroke-width="2"/>
+        <line x1="51" y1="22" x2="43" y2="33" stroke="#3aa6b5" stroke-width="2.4"/>
+        <line x1="46" y1="27" x2="38" y2="38" stroke="#2f8f9d" stroke-width="2.6"/>
+        <line x1="41" y1="32" x2="33" y2="43" stroke="#1b7a5a" stroke-width="2"/>
+        <line x1="36" y1="37" x2="28" y2="48" stroke="#3aa6b5" stroke-width="2.4"/></g></svg>`,
     alagamento: `<svg viewBox="0 0 64 64" class="psvg" role="img" aria-label="Alagamento">
       <rect x="2" y="12" width="17" height="34" fill="#d8d0c0"/><rect x="6" y="17" width="4" height="4" fill="#9bbcd0"/><rect x="12" y="17" width="4" height="4" fill="#9bbcd0"/>
       <rect x="45" y="8" width="17" height="38" fill="#cfc7b6"/><rect x="49" y="13" width="4" height="4" fill="#9bbcd0"/><rect x="55" y="13" width="4" height="4" fill="#9bbcd0"/>
       <rect x="0" y="46" width="64" height="18" fill="#b9b2a4"/><rect x="28" y="52" width="9" height="3" fill="#5c5c5c"/>
       <rect x="0" y="47" width="64" height="7" fill="#2f8f9d" opacity=".6"/>
-      <g class="a-rain"><line x1="14" y1="2" x2="12" y2="9" stroke="#2f8f9d" stroke-width="2"/>
-      <line x1="30" y1="0" x2="28" y2="7" stroke="#2f8f9d" stroke-width="2"/><line x1="46" y1="3" x2="44" y2="10" stroke="#2f8f9d" stroke-width="2"/></g></svg>`,
+      <g class="a-rain" fill="#2f8f9d"><path d="M14 2 q2 4 0 6 q-2 -2 0 -6Z"/><path d="M24 0 q2 4 0 6 q-2 -2 0 -6Z"/><path d="M34 3 q2 4 0 6 q-2 -2 0 -6Z"/><path d="M44 1 q2 4 0 6 q-2 -2 0 -6Z"/><path d="M54 3 q2 4 0 6 q-2 -2 0 -6Z"/></g></svg>`,
     deslizamento: `<svg viewBox="0 0 64 64" class="psvg" role="img" aria-label="Movimento de massa">
       <polygon points="0,64 0,30 40,8 64,8 64,64" fill="#b5651d"/><polygon points="0,64 6,40 40,18 64,28 64,64" fill="#8a6d3b"/>
       <g class="a-slide"><circle cx="26" cy="30" r="4" fill="#5c4326"/><circle cx="34" cy="38" r="3" fill="#43321c"/><rect x="18" y="36" width="6" height="6" rx="1" fill="#5c4326"/></g></svg>`,
@@ -132,9 +135,9 @@
   const SOLU_ANIM = {
     escada: `<svg viewBox="0 0 64 64" class="psvg" role="img" aria-label="Escada de chuva">
       <path d="M6 16 H22 V28 H34 V40 H46 V52 H58 V58 H6 Z" fill="#cdbfa3"/>
-      <g class="s-fall"><rect x="9" y="13" width="11" height="5" rx="2" fill="#2f8f9d"/>
-      <rect x="22" y="25" width="10" height="5" rx="2" fill="#1b7a5a"/>
-      <rect x="34" y="37" width="10" height="5" rx="2" fill="#2f8f9d"/></g></svg>`,
+      <g stroke="#2f8f9d" stroke-width="3" opacity=".35"><line x1="6" y1="18" x2="22" y2="18"/><line x1="22" y1="30" x2="34" y2="30"/><line x1="34" y1="42" x2="46" y2="42"/><line x1="46" y1="54" x2="58" y2="54"/></g>
+      <g class="s-fall" fill="#2f8f9d"><ellipse cx="22" cy="22" rx="1.7" ry="3.6"/>
+      <ellipse cx="34" cy="34" rx="1.7" ry="3.6"/><ellipse cx="46" cy="46" rx="1.7" ry="3.6"/></g></svg>`,
     bacia: `<svg viewBox="0 0 64 64" class="psvg" role="img" aria-label="Bacia de amortecimento">
       <path d="M8 16 V44 a8 8 0 0 0 8 8 H48 a8 8 0 0 0 8 -8 V16" fill="none" stroke="#bcae90" stroke-width="5"/>
       <clipPath id="cl-bacia"><path d="M11 18 V44 a5 5 0 0 0 5 5 H48 a5 5 0 0 0 5 -5 V18 Z"/></clipPath>
@@ -298,13 +301,18 @@
   /* ---------- Contadores ---------- */
   const semMovimento = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   function animateCount(el) {
-    const target = +el.dataset.count;
-    if (semMovimento) { el.textContent = NUM.format(target); return; }
+    const dec = el.dataset.decimal ? +el.dataset.decimal : 0;
+    const raw = +el.dataset.count;
+    const target = dec ? raw / Math.pow(10, dec) : raw;
+    const fmt = dec
+      ? (v) => v.toLocaleString("pt-BR", { minimumFractionDigits: dec, maximumFractionDigits: dec })
+      : (v) => NUM.format(Math.round(v));
+    if (semMovimento) { el.textContent = fmt(target); return; }
     const dur = 1400, t0 = performance.now();
     function tick(t) {
       const p = Math.min((t - t0) / dur, 1);
       const eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = NUM.format(Math.round(target * eased));
+      el.textContent = fmt(target * eased);
       if (p < 1) requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
@@ -369,6 +377,31 @@
       }
     });
 
+    // Faixas de vulnerabilidade social (IVS) — bar
+    const ivsEl = document.getElementById("chartIvs");
+    if (ivsEl && D.demografia) {
+      const fx = D.demografia.faixas;
+      const coresFx = ["#cfe0c4", "#9cc47e", "#e8a317", "#e07a2f", "#d73027"];
+      new Chart(ivsEl, {
+        type: "bar",
+        data: {
+          labels: fx.map(f => f.faixa),
+          datasets: [{ label: "Setores", data: fx.map(f => f.n), backgroundColor: coresFx, borderRadius: 6 }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: {
+              label: (c) => ` ${c.raw} setores (${fx[c.dataIndex].pct}%)`,
+              afterLabel: (c) => `IVS ${fx[c.dataIndex].intervalo}`
+            } }
+          },
+          scales: { y: { beginAtZero: true, grid: { color: "#eef0ec" } }, x: { grid: { display: false }, ticks: { font: { size: 11 } } } }
+        }
+      });
+    }
+
     // Investimento por tipo de obra (categoria) — doughnut
     const porCat = {};
     D.medidas.forEach(m => { porCat[m.categoria] = (porCat[m.categoria] || 0) + m.custo; });
@@ -411,6 +444,7 @@
     if (entries.some(en => en.isIntersecting)) { buildCharts(); chartObs.disconnect(); }
   }, { threshold: 0.1 });
   chartObs.observe(document.getElementById("risco"));
+  chartObs.observe(document.getElementById("perfil"));
   chartObs.observe(document.getElementById("acoes"));
   // fallback: garante a construção mesmo com salto direto via menu
   setTimeout(buildCharts, 2500);
@@ -523,22 +557,6 @@
           map.fitBounds(L.featureGroup(hits.map(h => h.layer)).getBounds(), { padding: [40, 40], maxZoom: 16 });
           if (hits.length === 1) showSetor(hits[0].props);
         }
-      });
-
-      // ---- Perto de mim ----
-      const geoBtn = document.getElementById("mapGeo");
-      geoBtn && geoBtn.addEventListener("click", () => {
-        if (!navigator.geolocation) return;
-        geoBtn.textContent = "📍 Localizando…";
-        navigator.geolocation.getCurrentPosition(
-          (pos) => {
-            const { latitude, longitude } = pos.coords;
-            L.circleMarker([latitude, longitude], { radius: 9, color: "#1b4dd6", fillColor: "#4d7cff", fillOpacity: .9 }).addTo(map).bindPopup("Você está aqui").openPopup();
-            map.setView([latitude, longitude], 14, { animate: true });
-            geoBtn.textContent = "📍 Perto de mim";
-          },
-          () => { geoBtn.textContent = "📍 Perto de mim"; alert("Não foi possível obter sua localização."); }
-        );
       });
     })
     .catch(() => { map.setView([-30.03, -51.19], 11); });
