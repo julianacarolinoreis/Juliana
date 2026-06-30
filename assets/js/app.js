@@ -190,6 +190,30 @@
     document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLb(); });
   }
 
+  // Guia "como agir" (abas por situação)
+  const guiaTabs = document.getElementById("guia-tabs");
+  const guiaCont = document.getElementById("guia-conteudo");
+  if (guiaTabs) {
+    guiaTabs.innerHTML = D.guia.map((g, i) =>
+      `<button class="guia-tab${i === 0 ? " is-active" : ""}" data-i="${i}"><span>${g.icone}</span>${g.situacao}</button>`).join("");
+    const bloco = (titulo, cls, itens) => `
+      <div class="guia-col guia-col--${cls}">
+        <h4>${titulo}</h4>
+        <ul>${itens.map(t => `<li>${t}</li>`).join("")}</ul>
+      </div>`;
+    function renderGuia(i) {
+      const g = D.guia[i];
+      guiaCont.innerHTML = bloco("Antes", "antes", g.antes) + bloco("Durante", "durante", g.durante) + bloco("Depois", "depois", g.depois);
+    }
+    renderGuia(0);
+    guiaTabs.addEventListener("click", (e) => {
+      const btn = e.target.closest(".guia-tab"); if (!btn) return;
+      guiaTabs.querySelectorAll(".guia-tab").forEach(b => b.classList.remove("is-active"));
+      btn.classList.add("is-active");
+      renderGuia(+btn.dataset.i);
+    });
+  }
+
   // Porto Alegre em números
   const c = D.cidade;
   document.getElementById("cidade").innerHTML = `
@@ -373,6 +397,32 @@
 
   const regionLayers = {}; // id -> array de layers
   let setoresLayer = null;
+  let todasLayers = []; // {layer, props}
+
+  // número-base do setor (ex.: "109/01-04" -> "109"; "094 (vários)" -> "94")
+  const baseSetor = (s) => { const m = String(s).match(/\d+/); return m ? String(parseInt(m[0], 10)) : ""; };
+  function medidasDoSetor(setor) {
+    const b = baseSetor(setor);
+    return D.medidas.filter(m => baseSetor(m.setor) === b);
+  }
+
+  // Detalhe de um setor (com as medidas previstas para ele)
+  function showSetor(p) {
+    const meds = medidasDoSetor(p.setor);
+    const medHtml = meds.length ? `
+      <p class="map-side__sub">Medidas previstas para este setor</p>
+      <ul class="map-side__med">${meds.map(m => `<li><span>${m.intervencao}</span><b>${BRL.format(m.custo)}</b></li>`).join("")}</ul>`
+      : `<p class="map-side__ctx">As medidas estruturais detalhadas estão organizadas por setor na seção “Medidas”.</p>`;
+    side.innerHTML = `
+      <span class="map-side__id">Setor ${p.setor}</span>
+      <h3>${p.bairro}</h3>
+      <p class="map-side__bairro">${p.grau} risco · ${p.tipo || "processos geo-hidrológicos"}</p>
+      <div class="map-side__rows">
+        ${p.pessoas != null ? `<div class="map-side__row"><span>Pessoas em risco</span><b>${NUM.format(p.pessoas)}</b></div>` : ""}
+        ${p.edif != null ? `<div class="map-side__row"><span>Edificações em risco</span><b>${NUM.format(p.edif)}</b></div>` : ""}
+      </div>
+      ${medHtml}`;
+  }
 
   fetch("assets/data/setores.geojson")
     .then(res => res.json())
@@ -383,16 +433,48 @@
           const p = f.properties;
           const reg = regiaoPorNomeBairro(p.bairro);
           if (reg) (regionLayers[reg.id] = regionLayers[reg.id] || []).push(layer);
+          todasLayers.push({ layer, props: p });
           layer.bindPopup(
             `<b>Setor ${p.setor}</b> · ${p.bairro}<br>${p.grau} risco` +
             (p.pessoas != null ? `<br>${NUM.format(p.pessoas)} pessoas · ${NUM.format(p.edif)} edificações` : "")
           );
-          layer.on("click", () => { if (reg) showSide(reg); });
-          layer.on("mouseover", () => layer.setStyle({ fillOpacity: .8, weight: 1.5 }));
+          layer.on("click", () => showSetor(p));
+          layer.on("mouseover", () => layer.setStyle({ fillOpacity: .85, weight: 1.6 }));
           layer.on("mouseout", () => setoresLayer.resetStyle(layer));
         }
       }).addTo(map);
       map.fitBounds(setoresLayer.getBounds(), { padding: [30, 30] });
+
+      // ---- Busca por bairro ou setor ----
+      const norm = (s) => (s || "").toString().toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+      const input = document.getElementById("mapSearch");
+      input && input.addEventListener("input", () => {
+        const q = norm(input.value.trim());
+        if (!q) { setoresLayer.setStyle(f => ({ fillOpacity: .55, weight: .7 })); map.fitBounds(setoresLayer.getBounds(), { padding: [30, 30] }); return; }
+        const hits = todasLayers.filter(({ props }) => norm(props.bairro).includes(q) || baseSetor(props.setor) === q.replace(/\D/g, "") || norm(props.setor).includes(q));
+        todasLayers.forEach(({ layer }) => layer.setStyle({ fillOpacity: .12, weight: .5 }));
+        hits.forEach(({ layer }) => layer.setStyle({ fillOpacity: .85, weight: 1.8 }).bringToFront());
+        if (hits.length) {
+          map.fitBounds(L.featureGroup(hits.map(h => h.layer)).getBounds(), { padding: [40, 40], maxZoom: 16 });
+          if (hits.length === 1) showSetor(hits[0].props);
+        }
+      });
+
+      // ---- Perto de mim ----
+      const geoBtn = document.getElementById("mapGeo");
+      geoBtn && geoBtn.addEventListener("click", () => {
+        if (!navigator.geolocation) return;
+        geoBtn.textContent = "📍 Localizando…";
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            const { latitude, longitude } = pos.coords;
+            L.circleMarker([latitude, longitude], { radius: 9, color: "#1b4dd6", fillColor: "#4d7cff", fillOpacity: .9 }).addTo(map).bindPopup("Você está aqui").openPopup();
+            map.setView([latitude, longitude], 14, { animate: true });
+            geoBtn.textContent = "📍 Perto de mim";
+          },
+          () => { geoBtn.textContent = "📍 Perto de mim"; alert("Não foi possível obter sua localização."); }
+        );
+      });
     })
     .catch(() => { map.setView([-30.03, -51.19], 11); });
 

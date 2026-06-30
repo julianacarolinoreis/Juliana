@@ -107,6 +107,64 @@ window.PMRR = (function () {
     "Assessoria técnica (ATHIS) para melhorias das moradias"
   ];
 
+  // ===== Guia: como agir (antes, durante e depois) =====
+  const guia = [
+    {
+      situacao: "Enchentes e inundações", icone: "🌊",
+      antes: [
+        "Acompanhe os alertas da Defesa Civil e saiba até onde a água costuma subir.",
+        "Combine com a família um ponto de encontro e uma rota de fuga para local alto.",
+        "Eleve móveis, documentos e produtos perigosos; prepare uma bolsa de emergência (documentos, remédios, água)."
+      ],
+      durante: [
+        "Ao primeiro aviso, vá para um local alto e seguro.",
+        "Não atravesse áreas alagadas a pé ou de carro.",
+        "Desligue a energia se a água começar a entrar e siga as orientações da Defesa Civil."
+      ],
+      depois: [
+        "Só volte quando as autoridades autorizarem.",
+        "Cuidado com fios elétricos e estruturas enfraquecidas; limpe e desinfete os ambientes.",
+        "Descarte alimentos que tiveram contato com a água e informe os danos à Defesa Civil."
+      ]
+    },
+    {
+      situacao: "Enxurradas", icone: "💧",
+      antes: [
+        "Em chuva forte, afaste-se de arroios, córregos e pontilhões.",
+        "Não jogue lixo nem construa nas margens; mantenha valas e bueiros desobstruídos.",
+        "Conheça antecipadamente a rota de fuga para um ponto elevado."
+      ],
+      durante: [
+        "Saia imediatamente para um local alto — a água sobe muito rápido.",
+        "Nunca tente atravessar a correnteza, mesmo que pareça rasa.",
+        "Proteja-se em local seguro e aguarde a orientação da Defesa Civil."
+      ],
+      depois: [
+        "Espere a água baixar e a liberação das autoridades para retornar.",
+        "Verifique a estrutura da casa antes de entrar.",
+        "Comunique pontos de erosão, margens e travessias danificadas."
+      ]
+    },
+    {
+      situacao: "Deslizamentos e queda de blocos", icone: "⛰️",
+      antes: [
+        "Observe sinais: rachaduras no chão e nas paredes, muros e postes inclinados, água empoçada na encosta.",
+        "Não faça cortes no terreno sem orientação técnica e mantenha a drenagem da encosta.",
+        "Evite construir e acumular entulho na beira de cortes e barrancos."
+      ],
+      durante: [
+        "Ao notar trincas, estalos ou água barrenta saindo do solo, saia na hora.",
+        "Avise os vizinhos e a Defesa Civil e vá para um local plano e seguro.",
+        "Não volte para pegar objetos."
+      ],
+      depois: [
+        "Não retorne sem autorização técnica.",
+        "Sinalize e isole a área de risco.",
+        "Procure a Defesa Civil ou a Prefeitura para a avaliação do local."
+      ]
+    }
+  ];
+
   // ===== Como a comunidade pode participar (Cartilha) =====
   const participacao = [
     { icone: "📢", titulo: "Comunicar situações de risco", desc: "Informar a Defesa Civil sobre entulho em arroios, queda de margens e barrancos, rachaduras em muros e moradias e ocupações inadequadas." },
@@ -248,7 +306,7 @@ window.PMRR = (function () {
   };
 
   return {
-    sintese, tipologia, regioes, criterios, processo, cidade, galeria,
+    sintese, tipologia, regioes, criterios, processo, cidade, galeria, guia,
     processosPerigosos, solucoesEstruturais, solucoesNaoEstruturais, participacao,
     medidas, medidasResumo, equipe,
     etapas, produtos, materiais, contatos, creditos
