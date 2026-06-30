@@ -89,11 +89,11 @@ window.PMRR = (function () {
 
   // ===== Soluções: medidas estruturais (tipos) =====
   const solucoesEstruturais = [
-    { icone: "🪜", nome: "Escada de chuva", desc: "Estrutura que conduz a água da chuva de forma controlada, reduzindo a velocidade e possíveis erosões." },
-    { icone: "🛢️", nome: "Bacias de amortecimento", desc: "Armazenam temporariamente a água da chuva e reduzem alagamentos a jusante." },
-    { icone: "🗑️", nome: "Armadilhas de lixo", desc: "Estruturas que retêm resíduos sólidos, evitando entupimentos e alagamentos." },
-    { icone: "🧱", nome: "Muros de contenção", desc: "Construídos com gabião, pedra ou concreto para conter o solo e evitar escorregamentos." },
-    { icone: "🏠", nome: "Moradias elevadas", desc: "Casas construídas acima do nível de inundação para reduzir danos." }
+    { anim: "escada", nome: "Escada de chuva", desc: "Estrutura que conduz a água da chuva de forma controlada, reduzindo a velocidade e possíveis erosões." },
+    { anim: "bacia", nome: "Bacias de amortecimento", desc: "Armazenam temporariamente a água da chuva e reduzem alagamentos a jusante." },
+    { anim: "armadilha", nome: "Armadilhas de lixo", desc: "Estruturas que retêm resíduos sólidos, evitando entupimentos e alagamentos." },
+    { anim: "muro", nome: "Muros de contenção", desc: "Construídos com gabião, pedra ou concreto para conter o solo e evitar escorregamentos." },
+    { anim: "elevada", nome: "Moradias elevadas", desc: "Casas construídas acima do nível de inundação para reduzir danos." }
   ];
 
   // ===== Soluções: medidas não estruturais (Cartilha) =====

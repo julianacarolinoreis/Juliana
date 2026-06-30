@@ -96,22 +96,27 @@
       <g class="a-rise"><path d="M0 40 q8 -4 16 0 t16 0 t16 0 t16 0 V64 H0Z" fill="#2f8f9d" opacity=".55"/>
       <path d="M0 46 q8 -4 16 0 t16 0 t16 0 t16 0 V64 H0Z" fill="#1b7a5a" opacity=".7"/></g></svg>`,
     enxurrada: `<svg viewBox="0 0 64 64" class="psvg" role="img" aria-label="Enxurrada">
-      <polygon points="0,64 0,46 64,10 64,64" fill="#d9c7a3"/><polygon points="0,64 0,52 64,20 64,64" fill="#c9b48a"/>
-      <g class="a-flow"><line x1="8" y1="50" x2="20" y2="44" stroke="#2f8f9d" stroke-width="3" stroke-linecap="round"/>
-      <line x1="22" y1="56" x2="36" y2="48" stroke="#1b7a5a" stroke-width="3" stroke-linecap="round"/>
-      <line x1="34" y1="46" x2="48" y2="38" stroke="#2f8f9d" stroke-width="3" stroke-linecap="round"/></g></svg>`,
+      <polygon points="0,0 0,64 22,64 27,0" fill="#b5651d"/><polygon points="64,0 64,64 42,64 37,0" fill="#9c5417"/>
+      <rect x="22" y="0" width="20" height="64" fill="#c9b48a"/>
+      <g class="a-rush"><path d="M22 -10 q5 7 10 0 q5 -7 10 0 V8 H22Z" fill="#1b7a5a"/>
+      <path d="M22 16 q5 7 10 0 q5 -7 10 0 V34 H22Z" fill="#2f8f9d"/>
+      <path d="M22 42 q5 7 10 0 q5 -7 10 0 V60 H22Z" fill="#1b7a5a"/></g></svg>`,
     alagamento: `<svg viewBox="0 0 64 64" class="psvg" role="img" aria-label="Alagamento">
-      <rect x="10" y="20" width="14" height="26" fill="#e8e2d5"/><rect x="40" y="16" width="14" height="30" fill="#d8d0c0"/>
-      <g class="a-rain"><line x1="20" y1="6" x2="20" y2="12" stroke="#2f8f9d" stroke-width="2"/>
-      <line x1="32" y1="3" x2="32" y2="9" stroke="#2f8f9d" stroke-width="2"/><line x1="44" y1="7" x2="44" y2="13" stroke="#2f8f9d" stroke-width="2"/></g>
-      <rect x="0" y="46" width="64" height="18" fill="#2f8f9d" opacity=".65"/></svg>`,
+      <rect x="2" y="12" width="17" height="34" fill="#d8d0c0"/><rect x="6" y="17" width="4" height="4" fill="#9bbcd0"/><rect x="12" y="17" width="4" height="4" fill="#9bbcd0"/>
+      <rect x="45" y="8" width="17" height="38" fill="#cfc7b6"/><rect x="49" y="13" width="4" height="4" fill="#9bbcd0"/><rect x="55" y="13" width="4" height="4" fill="#9bbcd0"/>
+      <rect x="0" y="46" width="64" height="18" fill="#b9b2a4"/><rect x="28" y="52" width="9" height="3" fill="#5c5c5c"/>
+      <rect x="0" y="47" width="64" height="7" fill="#2f8f9d" opacity=".6"/>
+      <g class="a-rain"><line x1="14" y1="2" x2="12" y2="9" stroke="#2f8f9d" stroke-width="2"/>
+      <line x1="30" y1="0" x2="28" y2="7" stroke="#2f8f9d" stroke-width="2"/><line x1="46" y1="3" x2="44" y2="10" stroke="#2f8f9d" stroke-width="2"/></g></svg>`,
     deslizamento: `<svg viewBox="0 0 64 64" class="psvg" role="img" aria-label="Movimento de massa">
       <polygon points="0,64 0,30 40,8 64,8 64,64" fill="#b5651d"/><polygon points="0,64 6,40 40,18 64,28 64,64" fill="#8a6d3b"/>
       <g class="a-slide"><circle cx="26" cy="30" r="4" fill="#5c4326"/><circle cx="34" cy="38" r="3" fill="#43321c"/><rect x="18" y="36" width="6" height="6" rx="1" fill="#5c4326"/></g></svg>`,
     erosao: `<svg viewBox="0 0 64 64" class="psvg" role="img" aria-label="Erosão">
-      <rect x="0" y="34" width="40" height="30" fill="#b5651d"/><rect x="0" y="34" width="40" height="6" fill="#7a9e5a"/>
-      <path d="M40 34 q-6 14 0 30 H64 V34 Z" fill="#2f8f9d" opacity=".7"/>
-      <g class="a-wash"><circle cx="44" cy="44" r="2" fill="#8a6d3b"/><circle cx="50" cy="52" r="2" fill="#b5651d"/><circle cx="46" cy="58" r="1.6" fill="#8a6d3b"/></g></svg>`
+      <rect x="0" y="46" width="64" height="18" fill="#2f8f9d" opacity=".6"/>
+      <path d="M0 16 H34 V36 C30 40 30 47 18 48 C10 48.6 4 47 0 49 Z" fill="#b5651d"/>
+      <rect x="0" y="16" width="34" height="6" fill="#7a9e5a"/>
+      <line x1="0" y1="30" x2="33" y2="30" stroke="#9a6b3a" stroke-width="1.5"/>
+      <g class="a-wash"><circle cx="22" cy="44" r="2.4" fill="#8a6d3b"/><circle cx="26" cy="50" r="2" fill="#b5651d"/><circle cx="19" cy="52" r="1.6" fill="#8a6d3b"/></g></svg>`
   };
 
   // Processos perigosos
@@ -122,10 +127,36 @@
       <p>${p.desc}</p>
     </article>`).join("");
 
+  // Ilustrações animadas das soluções (como cada obra funciona)
+  const SOLU_ANIM = {
+    escada: `<svg viewBox="0 0 64 64" class="psvg" role="img" aria-label="Escada de chuva">
+      <path d="M6 16 H22 V28 H34 V40 H46 V52 H58 V58 H6 Z" fill="#cdbfa3"/>
+      <g class="s-fall"><rect x="9" y="13" width="11" height="5" rx="2" fill="#2f8f9d"/>
+      <rect x="22" y="25" width="10" height="5" rx="2" fill="#1b7a5a"/>
+      <rect x="34" y="37" width="10" height="5" rx="2" fill="#2f8f9d"/></g></svg>`,
+    bacia: `<svg viewBox="0 0 64 64" class="psvg" role="img" aria-label="Bacia de amortecimento">
+      <path d="M8 16 V44 a8 8 0 0 0 8 8 H48 a8 8 0 0 0 8 -8 V16" fill="none" stroke="#bcae90" stroke-width="5"/>
+      <clipPath id="cl-bacia"><path d="M11 18 V44 a5 5 0 0 0 5 5 H48 a5 5 0 0 0 5 -5 V18 Z"/></clipPath>
+      <g clip-path="url(#cl-bacia)"><rect class="b-fill" x="8" y="16" width="48" height="36" fill="#2f8f9d" opacity=".75"/></g></svg>`,
+    armadilha: `<svg viewBox="0 0 64 64" class="psvg" role="img" aria-label="Armadilha de lixo">
+      <rect x="0" y="34" width="64" height="18" fill="#2f8f9d" opacity=".5"/>
+      <g stroke="#6b6b6b" stroke-width="2.5" stroke-linecap="round"><line x1="46" y1="32" x2="46" y2="54"/><line x1="51" y1="32" x2="51" y2="54"/></g>
+      <g class="t-trash"><rect x="2" y="40" width="5" height="5" fill="#b5651d"/><rect x="14" y="44" width="4" height="4" fill="#8a6d3b"/><circle cx="26" cy="42" r="2.6" fill="#6a994e"/></g></svg>`,
+    muro: `<svg viewBox="0 0 64 64" class="psvg" role="img" aria-label="Muro de contenção">
+      <polygon points="0,64 0,24 38,12 64,12 64,64" fill="#b5651d"/><polygon points="0,64 0,34 30,22 50,32 50,64" fill="#8a6d3b"/>
+      <rect x="46" y="32" width="9" height="32" fill="#9a9a9a"/>
+      <g class="m-fall"><circle cx="30" cy="28" r="2.6" fill="#5c4326"/><circle cx="38" cy="34" r="2.2" fill="#43321c"/></g></svg>`,
+    elevada: `<svg viewBox="0 0 64 64" class="psvg" role="img" aria-label="Moradia elevada">
+      <rect x="21" y="34" width="3" height="16" fill="#8a6d3b"/><rect x="40" y="34" width="3" height="16" fill="#8a6d3b"/>
+      <rect x="18" y="22" width="28" height="14" fill="#e8e2d5"/><polygon points="16,22 32,12 48,22" fill="#b5651d"/>
+      <rect x="29" y="26" width="6" height="10" fill="#9bbcd0"/>
+      <g class="a-rise"><path d="M0 50 q8 -3 16 0 t16 0 t16 0 t16 0 V64 H0Z" fill="#2f8f9d" opacity=".7"/></g></svg>`
+  };
+
   // Soluções estruturais
   document.getElementById("solucoes-estruturais").innerHTML = D.solucoesEstruturais.map(s => `
     <article class="solu reveal">
-      <span class="solu__icone">${s.icone}</span>
+      <div class="solu__anim">${SOLU_ANIM[s.anim] || ""}</div>
       <h4>${s.nome}</h4>
       <p>${s.desc}</p>
     </article>`).join("");
@@ -262,8 +293,10 @@
   document.getElementById("custoMedio").textContent = BRL.format(D.medidasResumo.custoMedio);
 
   /* ---------- Contadores ---------- */
+  const semMovimento = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   function animateCount(el) {
     const target = +el.dataset.count;
+    if (semMovimento) { el.textContent = NUM.format(target); return; }
     const dur = 1400, t0 = performance.now();
     function tick(t) {
       const p = Math.min((t - t0) / dur, 1);
@@ -375,6 +408,9 @@
     if (entries.some(en => en.isIntersecting)) { buildCharts(); chartObs.disconnect(); }
   }, { threshold: 0.1 });
   chartObs.observe(document.getElementById("risco"));
+  chartObs.observe(document.getElementById("acoes"));
+  // fallback: garante a construção mesmo com salto direto via menu
+  setTimeout(buildCharts, 2500);
 
   /* ---------- Mapa (Leaflet) — regiões ---------- */
   const map = L.map("map", { scrollWheelZoom: false }).setView([-30.03, -51.19], 11);
