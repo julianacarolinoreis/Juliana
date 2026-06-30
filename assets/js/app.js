@@ -96,11 +96,12 @@
       <g class="a-rise"><path d="M0 40 q8 -4 16 0 t16 0 t16 0 t16 0 V64 H0Z" fill="#2f8f9d" opacity=".55"/>
       <path d="M0 46 q8 -4 16 0 t16 0 t16 0 t16 0 V64 H0Z" fill="#1b7a5a" opacity=".7"/></g></svg>`,
     enxurrada: `<svg viewBox="0 0 64 64" class="psvg" role="img" aria-label="Enxurrada">
-      <path d="M0 64 Q16 16 32 14 Q48 16 64 64 Z" fill="#b5651d"/>
-      <path d="M7 64 Q21 30 32 27 Q43 30 57 64 Z" fill="#8a6d3b"/>
-      <path d="M27 16 Q24 40 20 64 L36 64 Q33 40 35 16 Z" fill="#2f8f9d" opacity=".9"/>
-      <g class="a-torrent"><circle cx="29" cy="26" r="2.6" fill="#fff" opacity=".9"/>
-      <circle cx="26" cy="40" r="2.2" fill="#dff3ee"/><circle cx="31" cy="52" r="2.4" fill="#fff" opacity=".85"/></g></svg>`,
+      <polygon points="0,52 64,16 64,64 0,64" fill="#b5651d"/><polygon points="0,60 64,28 64,64 0,64" fill="#8a6d3b"/>
+      <g transform="rotate(-29 13 46)"><rect x="8" y="41" width="10" height="8" fill="#e8e2d5"/><polygon points="7,41 13,36 19,41" fill="#9c4f2a"/></g>
+      <g transform="rotate(-29 40 30)"><rect x="35" y="25" width="9" height="7" fill="#e8e2d5"/><polygon points="34,25 39.5,20 45,25" fill="#9c4f2a"/></g>
+      <path d="M64 6 L64 17 L17 55 L12 50 Z" fill="#2f8f9d" opacity=".88"/>
+      <g class="a-torrent2"><circle cx="50" cy="22" r="2.4" fill="#fff" opacity=".9"/>
+      <circle cx="38" cy="32" r="2.6" fill="#dff3ee"/><circle cx="24" cy="46" r="2.3" fill="#fff" opacity=".85"/></g></svg>`,
     alagamento: `<svg viewBox="0 0 64 64" class="psvg" role="img" aria-label="Alagamento">
       <rect x="2" y="12" width="17" height="34" fill="#d8d0c0"/><rect x="6" y="17" width="4" height="4" fill="#9bbcd0"/><rect x="12" y="17" width="4" height="4" fill="#9bbcd0"/>
       <rect x="45" y="8" width="17" height="38" fill="#cfc7b6"/><rect x="49" y="13" width="4" height="4" fill="#9bbcd0"/><rect x="55" y="13" width="4" height="4" fill="#9bbcd0"/>
